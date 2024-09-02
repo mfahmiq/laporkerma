@@ -74,7 +74,7 @@
                             <div class="input-group">
                                 <span class="input-group-text" id="nomorDokumen-addon"><i class="bi bi-hash"></i></span>
                                 <input type="text" class="form-control" id="nomorDokumen"
-                                    aria-describedby="nomorDokumen-addon" placeholder="#">
+                                    aria-describedby="nomorDokumen-addon">
                             </div>
                         </div>
                         <div class="mb-3">
@@ -300,114 +300,99 @@
     });
 
     function initializeSelect2(container = document) {
-        $(container).find('.select2').each(function() {
-            $(this).select2({
-                dropdownParent: $(this).parent(),
-                width: '100%'
-            }).on('select2:open', function() {
-                // Add class to body to hide horizontal scrollbar
-                $('body').addClass('no-horizontal-scroll');
-            }).on('select2:close', function() {
-                // Remove class from body to show scrollbar again
-                $('body').removeClass('no-horizontal-scroll');
-            });
-        });
-    }
-
-    document.getElementById('addPenggiatBtn').addEventListener('click', function() {
-        var originalCard = document.querySelector('.penggiat-card');
-        var clone = originalCard.cloneNode(true);
-
-        var cardNumber = document.querySelectorAll('.penggiat-card').length + 1;
-        clone.querySelector('.card-header').innerHTML = '<i class="bi bi-geo-alt"></i> Pihak # ' + cardNumber;
-
-        // Add the "deleete" button to the cloned card header
-        var deleteBtn = document.createElement('button');
-        deleteBtn.type = 'button';
-        deleteBtn.classList.add('btn', 'btn-danger', 'btn-sm', 'ms-auto',
-            'me-0'); // Add classes to style the button
-        deleteBtn.innerHTML = '<i class="bi bi-trash"></i>';
-        deleteBtn.style.float = 'right'; // Align to the right
-        deleteBtn.addEventListener('click', function() {
-            clone.remove(); // Remove the cloned form
-        });
-        clone.querySelector('.card-header').appendChild(deleteBtn);
-
-        // Remove any existing Select2 elements from the clone
-        clone.querySelectorAll('.select2-container').forEach(el => el.remove());
-
-        // Reset the values of all form elements in the clone
-        clone.querySelectorAll('input, select, textarea').forEach(el => {
-            el.value = '';
-            if (el.classList.contains('select2-hidden-accessible')) {
-                $(el).select2('destroy');
-            }
-        });
-
-        // Update collapse functionality
-        var collapseToggle = clone.querySelector('.penanggungJawabToggle');
-        var collapseContent = clone.querySelector('.penanggungJawabCollapse');
-
-        // Generate unique IDs for the new collapse
-        var uniqueId = 'penanggungJawabCollapse' + cardNumber;
-        collapseContent.id = uniqueId;
-        collapseToggle.setAttribute('data-bs-target', '#' + uniqueId);
-        collapseToggle.setAttribute('aria-controls', uniqueId);
-
-        // Append the cloned card to the penggiatContainer
-        document.getElementById('penggiatContainer').appendChild(clone);
-
-        // Reinitialize Select2 for the newly added select elements
-        initializeSelect2(clone);
-
-        // Reinitialize Select2 for the newly added select elements
-        $(clone).find('.select2').each(function() {
-            $(this).select2({
-                dropdownParent: $(this).parent(),
-                width: '100%'
-            });
-        });
-
-        // Reinitialize collapse functionality
-        new bootstrap.Collapse(collapseContent, {
-            toggle: false
-        });
-
-        // Add click event listener for toggle
-        collapseToggle.addEventListener('click', function() {
-            bootstrap.Collapse.getOrCreateInstance(collapseContent).toggle();
+    $(container).find('.select2:not(.select2-hidden-accessible)').each(function() {
+        $(this).select2({
+            dropdownParent: $(this).parent(),
+            width: '100%'
+        }).on('select2:open', function() {
+            $('body').addClass('no-horizontal-scroll');
+        }).on('select2:close', function() {
+            $('body').removeClass('no-horizontal-scroll');
         });
     });
+}
+
+document.getElementById('addPenggiatBtn').addEventListener('click', function() {
+    var originalCard = document.querySelector('.penggiat-card');
+    var clone = originalCard.cloneNode(true);
+
+    var cardNumber = document.querySelectorAll('.penggiat-card').length + 1;
+    clone.querySelector('.card-header').innerHTML = '<i class="bi bi-geo-alt"></i> Pihak # ' + cardNumber;
+
+    // Add the "delete" button to the cloned card header
+    var deleteBtn = document.createElement('button');
+    deleteBtn.type = 'button';
+    deleteBtn.classList.add('btn', 'btn-danger', 'btn-sm', 'ms-auto', 'me-0');
+    deleteBtn.innerHTML = '<i class="bi bi-trash"></i>';
+    deleteBtn.style.float = 'right';
+    deleteBtn.addEventListener('click', function() {
+        clone.remove();
+    });
+    clone.querySelector('.card-header').appendChild(deleteBtn);
+
+    // Remove any existing Select2 elements from the clone
+    clone.querySelectorAll('.select2-container').forEach(el => el.remove());
+
+    // Reset the values of all form elements in the clone
+    clone.querySelectorAll('input, select, textarea').forEach(el => {
+        el.value = '';
+        if (el.classList.contains('select2-hidden-accessible')) {
+            $(el).select2('destroy').removeClass('select2-hidden-accessible');
+        }
+    });
+
+    // Update collapse functionality
+    var collapseToggle = clone.querySelector('.penanggungJawabToggle');
+    var collapseContent = clone.querySelector('.penanggungJawabCollapse');
+
+    // Generate unique IDs for the new collapse
+    var uniqueId = 'penanggungJawabCollapse' + cardNumber;
+    collapseContent.id = uniqueId;
+    collapseToggle.setAttribute('data-bs-target', '#' + uniqueId);
+    collapseToggle.setAttribute('aria-controls', uniqueId);
+
+    // Append the cloned card to the penggiatContainer
+    document.getElementById('penggiatContainer').appendChild(clone);
+
+    // Reinitialize Select2 for the newly added select elements
+    initializeSelect2(clone);
+
+    // Reinitialize collapse functionality
+    new bootstrap.Collapse(collapseContent, {
+        toggle: false
+    });
+
+    // Add click event listener for toggle
+    collapseToggle.addEventListener('click', function() {
+        bootstrap.Collapse.getOrCreateInstance(collapseContent).toggle();
+    });
+});
 
     // Initialize Select2 and collapse functionality on page load
     $(document).ready(function() {
-        $('.select2').each(function() {
-            $(this).select2({
-                dropdownParent: $(this).parent(),
-                width: '100%'
-            });
-        });
+    // Initialize Select2 for all select elements
+    initializeSelect2();
 
-        // Initialize collapse functionality for existing forms
-        document.querySelectorAll('.penanggungJawabToggle').forEach(function(toggle) {
-            var content = toggle.nextElementSibling;
-            new bootstrap.Collapse(content, {
-                toggle: false
-            });
-            toggle.addEventListener('click', function() {
-                bootstrap.Collapse.getOrCreateInstance(content).toggle();
-            });
+    // Initialize collapse functionality for existing forms
+    document.querySelectorAll('.penanggungJawabToggle').forEach(function(toggle) {
+        var content = toggle.nextElementSibling;
+        new bootstrap.Collapse(content, {
+            toggle: false
         });
-
-        // Dropzone initialization
-        Dropzone.autoDiscover = false;
-        const dropzone = new Dropzone("#my-dropzone", {
-            url: "/your/upload/endpoint",
-            maxFiles: 1,
-            acceptedFiles: ".pdf",
-            dictDefaultMessage: "Drag & Drop atau Klik area ini untuk upload"
+        toggle.addEventListener('click', function() {
+            bootstrap.Collapse.getOrCreateInstance(content).toggle();
         });
     });
+
+    // Dropzone initialization
+    Dropzone.autoDiscover = false;
+    const dropzone = new Dropzone("#my-dropzone", {
+        url: "/your/upload/endpoint",
+        maxFiles: 1,
+        acceptedFiles: ".pdf",
+        dictDefaultMessage: "Drag & Drop atau Klik area ini untuk upload"
+    });
+});
 
 
     $(document).ready(function() {

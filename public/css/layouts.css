@@ -465,3 +465,90 @@ footer {
 .btn-close:hover {
     opacity: 0.75;
 }
+
+/* dashboard card */
+
+body {
+    font-family: 'Raleway', sans-serif;
+}
+
+.main-part {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    padding: 0px 5px;
+}
+
+.cpanel {
+    width: 32%;
+    display: inline-block;
+    background-color: #34495E;
+    color: #fff;
+    margin-top: 50px;
+}
+
+.icon-part i {
+    font-size: 30px;
+    /* Adjust this size to fit your circle */
+    width: 60px;
+    /* Adjust width to be the same as the height */
+    height: 60px;
+    /* Adjust height to match the width */
+    line-height: 60px;
+    /* Vertically centers the icon */
+    border: 1px solid #fff;
+    border-radius: 50%;
+    background-color: #34495E;
+    display: inline-block;
+    margin-top: -25px;
+    margin-bottom: 10px;
+}
+
+.icon-part p {
+    margin: 0px;
+    font-size: 20px;
+    padding-bottom: 10px;
+}
+
+.card-content-part {
+    background-color: #2F4254;
+    padding: 5px 0px;
+}
+
+.cpanel .card-content-part:hover {
+    background-color: #283847;
+    cursor: pointer;
+}
+
+.cpanel-green .card-content-part:hover {
+    background-color: #117460;
+    cursor: pointer;
+}
+
+.cpanel-blue .card-content-part:hover {
+    background-color: #206491;
+    cursor: pointer;
+}
+
+.card-content-part a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.cpanel-green .icon-part,
+.cpanel-green .icon-part i {
+    background-color: #16A085;
+}
+
+.cpanel-green .card-content-part {
+    background-color: #149077;
+}
+
+.cpanel-blue .icon-part,
+.cpanel-blue .icon-part i {
+    background-color: #2980B9;
+}
+
+.cpanel-blue .card-content-part {
+    background-color: #2573A6;
+}

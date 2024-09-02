@@ -74,7 +74,7 @@
                             <div class="input-group">
                                 <span class="input-group-text" id="nomorDokumen-addon"><i class="bi bi-hash"></i></span>
                                 <input type="text" class="form-control" id="nomorDokumen"
-                                    aria-describedby="nomorDokumen-addon" placeholder="#">
+                                    aria-describedby="nomorDokumen-addon">
                             </div>
                         </div>
                         <div class="mb-3">
