@@ -1,19 +1,19 @@
 <x-layouts>
-    <div class="container mt-4">
+    <div class="container-fluid mt-4" style="overflow: hidden;">
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h4 class="card-title mb-0 small">Data Table</h4>
+                <h5 class="card-title">Tabel Kerjasama</h5>
                 <div class="d-flex align-items-center">
                     <!-- Tombol Filter -->
                     <a href="#" class="btn btn-info btn-sm me-2" id="filterButton">
                         <i class="bi bi-funnel"></i>
                     </a>
-                    <!-- Tombol Recycle -->
+                    <!-- Tombol Download -->
                     <a href="#" class="btn btn-success btn-sm me-2">
-                        <i class="bi bi-recycle"></i>
+                        <i class="bi bi-download"></i>
                     </a>
                     <!-- Tombol + Add -->
-                    <a href="#" class="btn btn-success btn-sm small" >+ Tambah</a>
+                    <a href="{{ route('kerma.create') }}" class="btn btn-success btn-sm small">+ Tambah</a>
                 </div>
             </div>
             <div class="card-body">
@@ -22,9 +22,11 @@
                     <div class="row">
                         <div class="col-md-12 mb-2 d-flex align-items-center">
                             <!-- Jenis Dokumen Kerjasama Icon -->
-                            <span class="input-group-text bg-transparent border-0"><i class="bi bi-file-earmark-text"></i></span>
+                            <span class="input-group-text bg-transparent border-0"><i
+                                    class="bi bi-file-earmark-text"></i></span>
                             <!-- Jenis Dokumen Kerjasama Select2 -->
-                            <select class="form-select select2" id="jenisDokumen" data-placeholder="Pilih Jenis Dokumen Kerjasama">
+                            <select class="form-select select2" id="jenisDokumen"
+                                data-placeholder="Pilih Jenis Dokumen Kerjasama">
                                 <option></option>
                                 <option value="1">Jenis Dokumen 1</option>
                                 <option value="2">Jenis Dokumen 2</option>
@@ -34,7 +36,8 @@
                             <!-- Sumber Pendanaan Icon -->
                             <span class="input-group-text bg-transparent border-0"><i class="bi bi-cash"></i></span>
                             <!-- Sumber Pendanaan Select2 -->
-                            <select class="form-select select2" id="sumberPendanaan" data-placeholder="Pilih Sumber Pendanaan">
+                            <select class="form-select select2" id="sumberPendanaan"
+                                data-placeholder="Pilih Sumber Pendanaan">
                                 <option></option>
                                 <option value="1">Sumber 1</option>
                                 <option value="2">Sumber 2</option>
@@ -42,9 +45,11 @@
                         </div>
                         <div class="col-md-12 mb-2 d-flex align-items-center">
                             <!-- Status Kerjasama Icon -->
-                            <span class="input-group-text bg-transparent border-0"><i class="bi bi-check-circle"></i></span>
+                            <span class="input-group-text bg-transparent border-0"><i
+                                    class="bi bi-check-circle"></i></span>
                             <!-- Status Kerjasama Select2 -->
-                            <select class="form-select select2" id="statusKerjasama" data-placeholder="Pilih Status Kerjasama">
+                            <select class="form-select select2" id="statusKerjasama"
+                                data-placeholder="Pilih Status Kerjasama">
                                 <option></option>
                                 <option value="1">Status 1</option>
                                 <option value="2">Status 2</option>
@@ -52,9 +57,11 @@
                         </div>
                         <div class="col-md-12 mb-2 d-flex align-items-center">
                             <!-- Bentuk Kegiatan Icon -->
-                            <span class="input-group-text bg-transparent border-0"><i class="bi bi-calendar-event"></i></span>
+                            <span class="input-group-text bg-transparent border-0"><i
+                                    class="bi bi-calendar-event"></i></span>
                             <!-- Bentuk Kegiatan Select2 -->
-                            <select class="form-select select2" id="bentukKegiatan" data-placeholder="Pilih Bentuk Kegiatan">
+                            <select class="form-select select2" id="bentukKegiatan"
+                                data-placeholder="Pilih Bentuk Kegiatan">
                                 <option></option>
                                 <option value="1">Bentuk 1</option>
                                 <option value="2">Bentuk 2</option>
@@ -72,9 +79,11 @@
                         </div>
                         <div class="col-md-12 mb-2 d-flex align-items-center">
                             <!-- Kondisi Tertentu Icon -->
-                            <span class="input-group-text bg-transparent border-0"><i class="bi bi-exclamation-circle"></i></span>
+                            <span class="input-group-text bg-transparent border-0"><i
+                                    class="bi bi-exclamation-circle"></i></span>
                             <!-- Kondisi Tertentu Select2 -->
-                            <select class="form-select select2" id="kondisiTertentu" data-placeholder="Pilih Kondisi Tertentu">
+                            <select class="form-select select2" id="kondisiTertentu"
+                                data-placeholder="Pilih Kondisi Tertentu">
                                 <option></option>
                                 <option value="1">Kondisi 1</option>
                                 <option value="2">Kondisi 2</option>
@@ -84,7 +93,8 @@
                             <!-- Klasifikasi Mitra Icon -->
                             <span class="input-group-text bg-transparent border-0"><i class="bi bi-list"></i></span>
                             <!-- Klasifikasi Mitra Select2 -->
-                            <select class="form-select select2" id="klasifikasiMitra" data-placeholder="Pilih Klasifikasi Mitra">
+                            <select class="form-select select2" id="klasifikasiMitra"
+                                data-placeholder="Pilih Klasifikasi Mitra">
                                 <option></option>
                                 <option value="1">Klasifikasi 1</option>
                                 <option value="2">Klasifikasi 2</option>
@@ -123,11 +133,11 @@
                                 <td class="small">2024-12-31</td>
                                 <td class="text-center">
                                     <a href="#" class="btn btn-primary btn-sm me-2">
-                                        <i class="bi bi-info-circle-fill small"></i>
+                                        <i class="bx bx-detail"></i>
                                     </a>
-                                    <a href="#" class="btn btn-sm btn-warning me-2">
+                                    <a href="{{ route('kermaEdit') }}" class="btn btn-sm btn-warning me-2">
                                         <i class="bi bi-pencil-fill small"></i>
-                                    </a>
+                                    </a>                                    
                                     <a href="#" class="btn btn-sm btn-danger">
                                         <i class="bi bi-trash-fill small"></i>
                                     </a>
@@ -141,71 +151,51 @@
     </div>
 
     <!-- Select2 CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
-
-    <!-- Custom CSS to reduce font size -->
-    <style>
-        .select2-container--default .select2-selection--single .select2-selection__rendered,
-        .select2-container--default .select2-results__option {
-            font-size: 12px;
-        }
-        
-        .input-group-text {
-            padding: 0.375rem 0.75rem;
-        }
-
-        .form-select.select2 {
-            flex-grow: 1;
-        }
-    </style>
 
     <!-- jQuery and Bootstrap JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
-    
-    <!-- Custom Script for Select2 with dropdownParent -->
+
+    <!-- Custom Script for Select2 Initialization -->
     <script>
         $(document).ready(function() {
-            function initializeSelect2() {
-                // Initialize Select2 for filter dropdowns
-                $('#filterDropdowns .select2').select2({
-                    width: '100%',
-                    placeholder: function(){
-                        return $(this).data('placeholder');
-                    },
-                    allowClear: true
-                });
+            // Initialize Select2 for the filter dropdowns
+            $('#jenisDokumen').select2({
+                width: 'resolve',
+                dropdownParent: $('#jenisDokumen').parent()
+            });
+            $('#sumberPendanaan').select2({
+                width: 'resolve',
+                dropdownParent: $('#sumberPendanaan').parent()
+            });
+            $('#statusKerjasama').select2({
+                width: 'resolve',
+                dropdownParent: $('#statusKerjasama').parent()
+            });
+            $('#bentukKegiatan').select2({
+                width: 'resolve',
+                dropdownParent: $('#bentukKegiatan').parent()
+            });
+            $('#tahun').select2({
+                width: 'resolve',
+                dropdownParent: $('#tahun').parent()
+            });
+            $('#kondisiTertentu').select2({
+                width: 'resolve',
+                dropdownParent: $('#kondisiTertentu').parent()
+            });
+            $('#klasifikasiMitra').select2({
+                width: 'resolve',
+                dropdownParent: $('#klasifikasiMitra').parent()
+            });
+            $('#negara').select2({
+                width: 'resolve',
+                dropdownParent: $('#negara').parent()
+            });
 
-                // Initialize Select2 for modal dropdowns
-                $('#myModal .select2').select2({
-                    width: '100%',
-                    placeholder: function(){
-                        return $(this).data('placeholder');
-                    },
-                    allowClear: true,
-                    dropdownParent: $('#myModal') // Attach dropdown to the modal
-                });
-            }
-
-            initializeSelect2();
-
-            // Toggle filter dropdowns
+            // Toggle filter dropdowns visibility
             $('#filterButton').on('click', function(e) {
                 e.preventDefault();
                 $('#filterDropdowns').toggle();
-                // Reinitialize Select2 when filter dropdowns are shown
-                initializeSelect2();
-            });
-
-            // Reinitialize Select2 when modal is shown
-            $('#myModal').on('shown.bs.modal', function () {
-                initializeSelect2();
-            });
-
-            // Ensure Select2 works when modal is hidden
-            $('#myModal').on('hidden.bs.modal', function () {
-                initializeSelect2();
             });
         });
     </script>

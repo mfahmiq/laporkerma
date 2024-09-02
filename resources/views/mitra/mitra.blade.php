@@ -1,19 +1,20 @@
 <x-layouts>
-    <div class="container mt-4">
+    <div class="container-fluid mt-4">
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h4 class="card-title mb-0 small">Data Table</h4>
+                <h5 class="card-title">Tabel Mitra</h5>
                 <div class="d-flex align-items-center">
                     <!-- Tombol Filter -->
                     <a href="#" class="btn btn-info btn-sm me-2" id="filterButton">
                         <i class="bi bi-funnel"></i>
                     </a>
-                    <!-- Tombol Recycle -->
+                    <!-- Tombol Download -->
                     <a href="#" class="btn btn-success btn-sm me-2">
-                        <i class="bi bi-recycle"></i>
+                        <i class="bi bi-download"></i>
                     </a>
                     <!-- Tombol + Add -->
-                    <a class="btn btn-success btn-sm small" data-bs-toggle="modal" data-bs-target="#myModal">+ Tambah</a>
+                    <a class="btn btn-success btn-sm small" data-bs-toggle="modal" data-bs-target="#myModalCreate">+
+                        Tambah</a>
                 </div>
             </div>
             <div class="card-body">
@@ -24,7 +25,8 @@
                             <!-- Klasifikasi Mitra Icon -->
                             <span class="input-group-text bg-transparent border-0"><i class="bi bi-list"></i></span>
                             <!-- Klasifikasi Mitra Select2 -->
-                            <select class="form-select select2 flex-grow-1" id="klasifikasiMitra" data-placeholder="Pilih Klasifikasi Mitra" style="min-width: 0;">
+                            <select class="form-select select2" id="klasifikasiMitra"
+                                data-placeholder="Pilih Klasifikasi Mitra">
                                 <option></option>
                                 <option value="1">Option 1</option>
                                 <option value="2">Option 2</option>
@@ -34,7 +36,7 @@
                             <!-- Negara Icon -->
                             <span class="input-group-text bg-transparent border-0"><i class="bi bi-flag"></i></span>
                             <!-- Negara Select2 -->
-                            <select class="form-select select2 flex-grow-1" id="negara" data-placeholder="Pilih Negara" style="min-width: 0;">
+                            <select class="form-select select2" id="negara" data-placeholder="Pilih Negara">
                                 <option></option>
                                 <option value="ID">Indonesia</option>
                                 <option value="US">Amerika Serikat</option>
@@ -61,12 +63,13 @@
                                 <td class="small">Digunakan</td>
                                 <td class="text-center">
                                     <a href="#" class="btn btn-primary btn-sm me-2">
-                                        <i class="bi bi-info-circle-fill small"></i>
+                                        <i class="bx bx-detail"></i>
                                     </a>
-                                    <a href="#" class="btn btn-sm btn-warning me-2">
+                                    <a data-bs-toggle="modal" data-bs-target="#myModalEdit"
+                                        class="btn btn-sm btn-warning me-2">
                                         <i class="bi bi-pencil-fill small"></i>
                                     </a>
-                                    <a href="#" class="btn btn-sm btn-danger">
+                                    <a href="#" class="btn btn-sm btn-danger btn-delete">
                                         <i class="bi bi-trash-fill small"></i>
                                     </a>
                                 </td>
@@ -80,55 +83,61 @@
 
     <!-- Include Modal -->
     @include('mitra.mitraEdit')
+    @include('mitra.mitraCreate')
 
-    <!-- Select2 CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
 
-    <!-- Custom CSS to reduce font size -->
-    <style>
-        .select2-container--default .select2-selection--single .select2-selection__rendered,
-        .select2-container--default .select2-results__option {
-            font-size: 12px;
-        }
-        
-        .input-group-text {
-            padding: 0.375rem 0.75rem;
-        }
-
-        .form-select.select2 {
-            flex-grow: 1;
-        }
-    </style>
 
     <!-- jQuery and Bootstrap JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
-    
+
     <!-- Custom Script for Select2 with dropdownParent -->
     <script>
         $(document).ready(function() {
+            // Fungsi untuk inisialisasi Select2 pada elemen yang relevan
             function initializeSelect2() {
-                // Initialize Select2 for filter dropdowns
+                // Inisialisasi Select2 untuk dropdown filter
                 $('#filterDropdowns .select2').select2({
                     width: '100%',
-                    placeholder: function(){
+                    placeholder: function() {
                         return $(this).data('placeholder');
                     },
                     allowClear: true
                 });
 
-                // Initialize Select2 for modal dropdowns
-                $('#myModal .select2').select2({
+                // Inisialisasi Select2 untuk dropdown dalam myModalEdit
+                $('#myModalEdit .select2').select2({
                     width: '100%',
-                    placeholder: function(){
+                    placeholder: function() {
                         return $(this).data('placeholder');
                     },
                     allowClear: true,
-                    dropdownParent: $('#myModal') // Attach dropdown to the modal
+                    dropdownParent: $('#myModalEdit') // Attach dropdown to the modal
+                });
+
+                // Inisialisasi Select2 untuk dropdown dalam myModalCreate
+                $('#myModalCreate .select2').select2({
+                    width: '100%',
+                    placeholder: function() {
+                        return $(this).data('placeholder');
+                    },
+                    allowClear: true,
+                    dropdownParent: $('#myModalCreate') // Attach dropdown to the modal
+                });
+
+                // Inisialisasi Select2 untuk elemen tambahan
+                $('#klasifikasiMitra').select2({
+                    width: '100%',
+                    dropdownParent: $('#klasifikasiMitra').parent() // Ensure dropdown is attached to parent
+                });
+
+                $('#negara').select2({
+                    width: '100%',
+                    allowClear: true,
+                    dropdownParent: $('#negara').parent() // Ensure dropdown is attached to parent
                 });
             }
 
+            // Inisialisasi Select2 pertama kali
             initializeSelect2();
 
             // Toggle filter dropdowns
@@ -139,15 +148,35 @@
                 initializeSelect2();
             });
 
-            // Reinitialize Select2 when modal is shown
-            $('#myModal').on('shown.bs.modal', function () {
-                initializeSelect2();
+            // Reinitialize Select2 ketika modal myModalEdit ditampilkan
+            $('#myModalEdit').on('shown.bs.modal', function() {
+                console.log('Modal Edit ditampilkan');
+                $('#myModalEdit .select2').select2({
+                    width: '100%',
+                    placeholder: function() {
+                        return $(this).data('placeholder');
+                    },
+                    allowClear: true,
+                    dropdownParent: $('#myModalEdit')
+                });
             });
 
-            // Ensure Select2 works when modal is hidden
-            $('#myModal').on('hidden.bs.modal', function () {
-                initializeSelect2();
+            // Reinitialize Select2 ketika modal myModalCreate ditampilkan
+            $('#myModalCreate').on('shown.bs.modal', function() {
+                console.log('Modal Create ditampilkan');
+                $('#myModalCreate .select2').select2({
+                    width: '100%',
+                    placeholder: function() {
+                        return $(this).data('placeholder');
+                    },
+                    allowClear: true,
+                    dropdownParent: $('#myModalCreate')
+                });
             });
+
+            // Ensure Dropzone.autoDiscover is set to false
+            Dropzone.autoDiscover = false;
         });
     </script>
+
 </x-layouts>
