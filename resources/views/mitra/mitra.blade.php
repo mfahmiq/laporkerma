@@ -1,5 +1,8 @@
 <x-layouts>
+<<<<<<< HEAD
     
+=======
+>>>>>>> a08391c349c428e5762a699e9b0a3feb4c7f8e72
     <div class="container-fluid mt-4">
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
@@ -57,6 +60,7 @@
                             </tr>
                         </thead>
                         <tbody>
+<<<<<<< HEAD
                             @foreach ($dataMitra as $mitra)
                             <tr>
                                 <td class="small text-center">{{ $loop->iteration }}</td>
@@ -72,11 +76,30 @@
                                         <i class="bi bi-pencil-fill small"></i>
                                     </a>
                                     <a href="#" class="btn btn-sm btn-danger btn-delete" id="delete">
+=======
+                            <tr>
+                                <td class="small text-center">1</td>
+                                <td class="small">System Architect</td>
+                                <td class="small">Indonesia</td>
+                                <td class="small">Digunakan</td>
+                                <td class="text-center">
+                                    <a href="#" class="btn btn-primary btn-sm me-2">
+                                        <i class="bx bx-detail"></i>
+                                    </a>
+                                    <a data-bs-toggle="modal" data-bs-target="#myModalEdit"
+                                        class="btn btn-sm btn-warning me-2">
+                                        <i class="bi bi-pencil-fill small"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-sm btn-danger btn-delete">
+>>>>>>> a08391c349c428e5762a699e9b0a3feb4c7f8e72
                                         <i class="bi bi-trash-fill small"></i>
                                     </a>
                                 </td>
                             </tr>
+<<<<<<< HEAD
                             @endforeach
+=======
+>>>>>>> a08391c349c428e5762a699e9b0a3feb4c7f8e72
                         </tbody>
                     </table>
                 </div>

@@ -4,7 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD
     "content-hash": "cab9eebaa91de034aa0a9561f60fe83a",
+=======
+    "content-hash": "e5fbbe6137dc77bcd5b6646b5dd75b52",
+>>>>>>> a08391c349c428e5762a699e9b0a3feb4c7f8e72
     "packages": [
         {
             "name": "brick/math",
@@ -3110,6 +3114,7 @@
             "time": "2024-04-27T21:32:50+00:00"
         },
         {
+<<<<<<< HEAD
             "name": "realrashid/sweet-alert",
             "version": "v7.2.0",
             "source": {
@@ -3200,6 +3205,8 @@
             "time": "2024-06-15T16:17:23+00:00"
         },
         {
+=======
+>>>>>>> a08391c349c428e5762a699e9b0a3feb4c7f8e72
             "name": "symfony/clock",
             "version": "v7.1.1",
             "source": {

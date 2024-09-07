@@ -6,8 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LAPORKERMA</title>
     <link rel="icon" href="{{ asset('images/logo.png') }}" type="image/x-icon">
+<<<<<<< HEAD
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+=======
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+>>>>>>> a08391c349c428e5762a699e9b0a3feb4c7f8e72
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.datatables.net/2.1.4/css/dataTables.bootstrap5.css">
@@ -34,7 +38,11 @@
             </div>
             <ul class="nav-links">
                 <li>
+<<<<<<< HEAD
                     <a href="{{ url('/dashboard') }}">
+=======
+                    <a href="{{ url('/') }}">
+>>>>>>> a08391c349c428e5762a699e9b0a3feb4c7f8e72
                         <i class='bx bx-grid-alt'></i>
                         <span class="link_name">Beranda</span>
                     </a>
@@ -68,21 +76,35 @@
                 <div class="profile-menu" onclick="toggleDropdown()">
                     <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Profile Picture" id="profile-pic">
                     <div class="dropdown-menu" id="profileDropdown">
+<<<<<<< HEAD
                         <div class="profile-details" style="margin-right: 50px;">
                             <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Profile Picture">
                             <div class="name-job">
                                 <div class="profile_name">{{ auth()->user()->name }}</div>
+=======
+                        <div class="profile-details">
+                            <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Profile Picture">
+                            <div class="name-job">
+                                <div class="profile_name">Muhammad Fahmi Assidiq</div>
+>>>>>>> a08391c349c428e5762a699e9b0a3feb4c7f8e72
                             </div>
                         </div>
                         <a href="#" class="dropdown-item">
                             <i class='bx bx-user-circle' style="margin-right: 10px;"></i>
                             Profile Settings
                         </a>
+<<<<<<< HEAD
                         <form action="/logout" method="post">
                             @csrf
                             <button type="submit" class="dropdown-item" style="color: white"><i class='bx bx-log-out'
                                     style="margin-right: 12px;"></i>Logout</button>
                         </form>
+=======
+                        <a href="#" class="dropdown-item">
+                            <i class='bx bx-log-out' style="margin-right: 10px;"></i>
+                            Logout
+                        </a>
+>>>>>>> a08391c349c428e5762a699e9b0a3feb4c7f8e72
                     </div>
                 </div>
             </div>
@@ -137,10 +159,14 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<<<<<<< HEAD
     <script></script>
     <script>
         new DataTable('#example');
     </script>
+=======
+    <script>new DataTable('#example');</script>
+>>>>>>> a08391c349c428e5762a699e9b0a3feb4c7f8e72
 </body>
 
 </html>
