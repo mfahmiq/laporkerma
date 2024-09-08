@@ -13,7 +13,7 @@
                         <i class="bi bi-download"></i>
                     </a>
                     <!-- Tombol + Add -->
-                    <a href="{{ route('kerma.create') }}" class="btn btn-success btn-sm small">+ Tambah</a>
+                    <a href="/kerma/create" class="btn btn-success btn-sm small">+ Tambah</a>
                 </div>
             </div>
             <div class="card-body">
@@ -135,7 +135,7 @@
                                     <a href="#" class="btn btn-primary btn-sm me-2">
                                         <i class="bx bx-detail"></i>
                                     </a>
-                                    <a href="{{ route('kermaEdit') }}" class="btn btn-sm btn-warning me-2">
+                                    <a href="{{ url('kermaEdit') }}" class="btn btn-sm btn-warning me-2">
                                         <i class="bi bi-pencil-fill small"></i>
                                     </a>                                    
                                     <a href="#" class="btn btn-sm btn-danger">

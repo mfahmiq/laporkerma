@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class StatusKerma extends Model
 {
     use HasFactory;
+
+    protected $guarded = ['id'];
+
+    public function kermas()
+    {
+        return $this->hasMany(Kerma::class);
+    }
 }

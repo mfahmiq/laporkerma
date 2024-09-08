@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\KermaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MitraController;
@@ -9,26 +10,6 @@ use App\Http\Controllers\RegisterController;
 Route::get('/', function () {
     return view('login/index');
 });
-
-// Route untuk halaman login
-Route::get('/login', function () {
-    return view('login');
-});
-
-// Route untuk halaman kerma
-Route::get('/kerma', function () {
-    return view('kerjasama/kerma');
-});
-
-// Route untuk membuat kerma
-Route::get('/kerma/create', function () {
-    return view('kerjasama/kermaCreate');
-})->name('kerma.create');
-
-// Route untuk mengedit kerma
-Route::get('/kerma/edit', function () {
-    return view('kerjasama/kermaEdit');
-})->name('kermaEdit');
 
 // Route profile
 Route::get('/profile', function () {
@@ -49,5 +30,10 @@ Route::get('/dashboard', function() {
     return view('dashboard.index');
 })->middleware('auth');
 
+// Resource route untuk kemrma
+Route::resource('/kerma', KermaController::class)->middleware('auth');
+
 // Resource route untuk mitra
 Route::resource('/mitra', MitraController::class)->middleware('auth');
+
+Route::get('/get-indikators/{sasaranId}', [KermaController::class, 'getIndikatorsBySasaran']);

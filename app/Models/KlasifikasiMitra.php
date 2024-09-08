@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class KlasifikasiMitra extends Model
 {
     use HasFactory;
+
+    protected $guarded = ['id'];
+
+    public function mitras()
+    {
+        return $this->hasMany(Mitra::class);
+    }
 }

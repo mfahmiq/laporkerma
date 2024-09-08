@@ -10,10 +10,12 @@
                     @csrf
                     <div class="mb-3">
                         <label for="klasifikasi" class="form-label">Klasifikasi Mitra</label>
-                        <select class="form-select select2" id="klasifikasi" name="klasifikasi_id"
+                        <select class="form-select select2" id="klasifikasi" name="klasifikasi_mitra_id"
                             data-placeholder="Pilih Klasifikasi Mitra">
                             <option></option>
-                            <option value="1">Pilihan 1</option>
+                            @foreach ($klasifikasi_mitras as $klasifikasi)
+                                <option value="{{ $klasifikasi->id }}">{{ $klasifikasi->name }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="mb-3">
@@ -29,11 +31,12 @@
                         <textarea class="form-control" id="alamat" name="alamat" rows="3"></textarea>
                     </div>
                     <div class="mb-3">
-                        <label for="country_id" class="form-label">Negara</label>
-                        <select class="form-select select2" id="country_id" name="country_id"
-                            data-placeholder="Pilih Negara">
+                        <label for="country" class="form-label">Negara</label>
+                        <select class="form-select select2" name="country_id" data-placeholder="Pilih Negara">
                             <option></option>
-                            <option value="ID">Indonesia</option>
+                            @foreach ($countries as $country)
+                                <option value="{{ $country->id }}">{{ $country->name }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="mb-3">

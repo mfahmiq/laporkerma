@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Mitra;
 use App\Models\Country;
+use App\Models\KlasifikasiMitra;
 use Illuminate\Http\Request;
 
 class MitraController extends Controller
@@ -14,7 +15,9 @@ class MitraController extends Controller
     public function index()
     {
         return view('mitra.mitra', [
-            'dataMitra' => Mitra::all()
+            'dataMitra' => Mitra::all(),
+            'klasifikasi_mitras' => KlasifikasiMitra::all(),
+            'countries' => Country::all()
         ]);
     }
 
@@ -23,9 +26,7 @@ class MitraController extends Controller
      */
     public function create()
     {
-        return view('mitra.mitraCreate', [
-            'countries' => Country::all()
-        ]);
+        return view('mitra.mitraCreate');
     }
 
 
@@ -39,6 +40,7 @@ class MitraController extends Controller
             'nama_institusi' => $request->nama_institusi,
             'alamat' => $request->alamat,
             'country_id' => $request->country_id,
+            'klasifikasi_mitra_id' => $request->klasifikasi_mitra_id,
             'telp' => $request->telp,
             'website' => $request->website,
         ]);

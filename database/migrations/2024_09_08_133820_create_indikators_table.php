@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('indikators', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('sasaran_id')->constrained()->onDelete('cascade');
+            $table->string('indikator');
+            $table->string('volume')->default('0');
+            $table->string('satuan')->nullable();
             $table->timestamps();
         });
     }

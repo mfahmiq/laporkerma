@@ -28,8 +28,9 @@
                             <select class="form-select select2" id="klasifikasiMitra"
                                 data-placeholder="Pilih Klasifikasi Mitra">
                                 <option></option>
-                                <option value="1">Option 1</option>
-                                <option value="2">Option 2</option>
+                                @foreach ($klasifikasi_mitras as $klasifikasi)
+                                    <option value="{{ $klasifikasi->id }}">{{ $klasifikasi->name }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="col-md-6 mb-2 d-flex align-items-center">
@@ -38,8 +39,9 @@
                             <!-- Negara Select2 -->
                             <select class="form-select select2" id="negara" data-placeholder="Pilih Negara">
                                 <option></option>
-                                <option value="ID">Indonesia</option>
-                                <option value="US">Amerika Serikat</option>
+                                @foreach ($countries as $country)
+                                    <option value="{{ $country->id }}">{{ $country->name }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
@@ -57,24 +59,24 @@
                         </thead>
                         <tbody>
                             @foreach ($dataMitra as $mitra)
-                            <tr>
-                                <td class="small text-center">{{ $loop->iteration }}</td>
-                                <td class="small">{{ $mitra->nama_institusi }}</td>
-                                <td class="small">{{ $mitra->negara }}</td>
-                                <td class="small">{{ $mitra->status }}</td>
-                                <td class="text-center">
-                                    {{-- <a href="/mitra/{{ $mitra->id }}" class="btn btn-primary btn-sm me-2">
+                                <tr>
+                                    <td class="small text-center">{{ $loop->iteration }}</td>
+                                    <td class="small">{{ $mitra->nama_institusi }}</td>
+                                    <td class="small">{{ $mitra->country->name }}</td>
+                                    <td class="small">{{ $mitra->status }}</td>
+                                    <td class="text-center">
+                                        {{-- <a href="/mitra/{{ $mitra->id }}" class="btn btn-primary btn-sm me-2">
                                         <i class="bx bx-detail"></i>
                                     </a> --}}
-                                    <a href="{{ url('mitraEdit') }}" data-bs-toggle="modal" data-bs-target="#myModalEdit"
-                                        class="btn btn-sm btn-warning me-2">
-                                        <i class="bi bi-pencil-fill small"></i>
-                                    </a>
-                                    <a href="#" class="btn btn-sm btn-danger btn-delete" id="delete">
-                                        <i class="bi bi-trash-fill small"></i>
-                                    </a>
-                                </td>
-                            </tr>
+                                        <a href="{{ url('mitraEdit') }}" data-bs-toggle="modal"
+                                            data-bs-target="#myModalEdit" class="btn btn-sm btn-warning me-2">
+                                            <i class="bi bi-pencil-fill small"></i>
+                                        </a>
+                                        <a href="#" class="btn btn-sm btn-danger btn-delete" id="delete">
+                                            <i class="bi bi-trash-fill small"></i>
+                                        </a>
+                                    </td>
+                                </tr>
                             @endforeach
                         </tbody>
                     </table>

@@ -5,97 +5,124 @@
             <div class="card-body">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h5 class="card-title">Form Kerjasama</h5>
-                    <a class="btn btn-success btn-sm small"> <i class="bx bx-save"></i> Simpan</a>   
+                    <a class="btn btn-success btn-sm small"> <i class="bx bx-save"></i> Simpan</a>
+                </div>
+            </div>
+            <br>
+            <div class="d-flex flex-row flex-wrap">
+                <div class="flex-fill me-3" style="min-width: 300px;">
+                    <div class="mb-4">
+                        <!-- Card Masa Berlaku -->
+                        <div class="card">
+                            <div class="card-header">
+                                <i class="bi bi-calendar"></i> MASA BERLAKU
+                            </div>
+                            <div class="card-body">
+                                <!-- Form Input untuk Masa Berlaku -->
+                                <div class="mb-3">
+                                    <label for="status" class="form-label">Status</label>
+                                    <select class="form-select select2" id="status" name="status_mitra_id"
+                                        data-placeholder="Status Kerja Sama">
+                                        <option></option>
+                                        @foreach ($status_kermas as $status)
+                                            <option value="{{ $status->id }}">{{ $status->status }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="tanggal_awal" class="form-label">Tanggal Awal</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="tanggalAwal-addon"><i
+                                                class="bi bi-calendar-date"></i></span>
+                                        <input type="date" class="form-control" id="tanggal_awal" name="tanggal_awal"
+                                            aria-describedby="tanggalAwal-addon">
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="tanggal_akhir" class="form-label">Tanggal Berakhir</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="tanggalBerakhir-addon"><i
+                                                class="bi bi-calendar-date"></i></span>
+                                        <input type="date" class="form-control" id="tanggal_akhir"
+                                            name="tanggal_akhir" aria-describedby="tanggalBerakhir-addon">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Card Dokumen -->
+                        <div class="card mt-4">
+                            <div class="card-header">
+                                <i class="bi bi-file-earmark"></i> DOKUMEN
+                            </div>
+                            <div class="card-body">
+                                <form action="/your/upload/endpoint" class="dropzone" id="my-dropzone">
+                                    <div class="dz-message">
+                                        <i class="bi bi-cloud-upload-fill" style="font-size: 2rem;"></i><br>
+                                        Drag & Drop atau Klik area ini untuk upload
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <br>
-                <div class="d-flex flex-row flex-wrap">
-                    <div class="flex-fill me-3" style="min-width: 300px;">
-                        <div class="mb-4">
-                            <!-- Card Masa Berlaku -->
-                            <div class="card">
-                                <div class="card-header">
-                                    <i class="bi bi-calendar"></i> MASA BERLAKU
-                                </div>
-                                <div class="card-body">
-                                    <!-- Form Input untuk Masa Berlaku -->
-                                    <div class="mb-3">
-                                        <label for="status" class="form-label">Status</label>
-                                        <select class="form-select select2" id="status">
-                                            <option selected>Status Kerja Sama</option>
-                                        </select>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="tanggalAwal" class="form-label">Tanggal Awal</label>
-                                        <div class="input-group">
-                                            <span class="input-group-text" id="tanggalAwal-addon"><i
-                                                    class="bi bi-calendar-date"></i></span>
-                                            <input type="date" class="form-control" id="tanggalAwal"
-                                                aria-describedby="tanggalAwal-addon">
-                                        </div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="tanggalBerakhir" class="form-label">Tanggal Berakhir</label>
-                                        <div class="input-group">
-                                            <span class="input-group-text" id="tanggalBerakhir-addon"><i
-                                                    class="bi bi-calendar-date"></i></span>
-                                            <input type="date" class="form-control" id="tanggalBerakhir"
-                                                aria-describedby="tanggalBerakhir-addon">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Card Dokumen -->
-                            <div class="card mt-4">
-                                <div class="card-header">
-                                    <i class="bi bi-file-earmark"></i> DOKUMEN
-                                </div>
-                                <div class="card-body">
-                                    <form action="/your/upload/endpoint" class="dropzone" id="my-dropzone">
-                                        <div class="dz-message">
-                                            <i class="bi bi-cloud-upload-fill" style="font-size: 2rem;"></i><br>
-                                            Drag & Drop atau Klik area ini untuk upload
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
+                <div class="flex-fill ms-3" style="min-width: 300px;">
+                    <!-- Form Input untuk Jenis Dokumen Kerjasama -->
+                    <div class="mb-3">
+                        <label for="jenisDokumen" class="form-label">Jenis Dokumen Kerjasama</label>
+                        <select class="form-select select2" id="jenisDokumen" name="jenis_kerma_id"
+                            data-placeholder="Pilih jenis dokumen kerjasama">
+                            <option></option>
+                            @foreach ($jenis_kermas as $jenis)
+                                <option value="{{ $jenis->id }}">{{ $jenis->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="nomorDokumen" class="form-label">Nomor Dokumen</label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="nomorDokumen-addon"><i class="bi bi-hash"></i></span>
+                            <input type="text" class="form-control" id="nomorDokumen"
+                                aria-describedby="nomorDokumen-addon">
                         </div>
                     </div>
-                    <div class="flex-fill ms-3" style="min-width: 300px;">
-                        <!-- Form Input untuk Jenis Dokumen Kerjasama -->
-                        <div class="mb-3">
-                            <label for="jenisDokumen" class="form-label">Jenis Dokumen Kerjasama</label>
-                            <select class="form-select select2" id="jenisDokumen">
-                                <option selected>Pilih jenis dokumen kerjasama</option>
-                            </select>
+                    <div class="mb-3">
+                        <label for="judulKerjasama" class="form-label">Judul Kerjasama</label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="judulKerjasama-addon"><i
+                                    class="bi bi-card-heading"></i></span>
+                            <input type="text" class="form-control" id="judulKerjasama"
+                                aria-describedby="judulKerjasama-addon" placeholder="Judul">
                         </div>
-                        <div class="mb-3">
-                            <label for="nomorDokumen" class="form-label">Nomor Dokumen</label>
-                            <div class="input-group">
-                                <span class="input-group-text" id="nomorDokumen-addon"><i class="bi bi-hash"></i></span>
-                                <input type="text" class="form-control" id="nomorDokumen"
-                                    aria-describedby="nomorDokumen-addon">
-                            </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="deskripsi" class="form-label">Deskripsi</label>
+                        <small class="text-muted d-block mb-2">Ringkasan singkat terkait cakupan atau kegiatan kerja
+                            sama</small>
+                        <textarea class="form-control" id="deskripsi" rows="4"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="anggaran" class="form-label">Anggaran</label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="nomorDokumen-addon"><i
+                                    class="bi bi-card-heading"></i></span>
+                            <input type="text" class="form-control" id="anggaran" name="anggaran"
+                                aria-describedby="anggaran-addon" placeholder="Biaya">
                         </div>
-                        <div class="mb-3">
-                            <label for="judulKerjasama" class="form-label">Judul Kerjasama</label>
-                            <div class="input-group">
-                                <span class="input-group-text" id="judulKerjasama-addon"><i
-                                        class="bi bi-card-heading"></i></span>
-                                <input type="text" class="form-control" id="judulKerjasama"
-                                    aria-describedby="judulKerjasama-addon" placeholder="Judul">
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="deskripsi" class="form-label">Deskripsi</label>
-                            <small class="text-muted d-block mb-2">Ringkasan singkat terkait cakupan atau kegiatan kerja
-                                sama</small>
-                            <textarea class="form-control" id="deskripsi" rows="4"></textarea>
-                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="sumber_pendanaan" class="form-label">Sumber Pendanaan</label>
+                        <select class="form-select select2" id="sumber_pendanaan" name="sumber_pendanaan_id"
+                            data-placeholder="Pilih sumber pendanaan">
+                            <option></option>
+                            @foreach ($sumber_pendanaans as $sumber)
+                                <option value="{{ $sumber->id }}">{{ $sumber->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
     <!-- Container Wrapper untuk Container Kedua dan Ketiga -->
@@ -211,12 +238,12 @@
                     </div>
                     <div class="card-body">
                         <div class="form-group mb-3">
-                            <label for="bentukKegiatan" class="form-label">Pilih bentuk kegiatan</label>
-                            <select class="form-select" id="bentukKegiatan" placeholder="Pilih Bentuk Kegiatan">
-                                <option value="">Pilih Bentuk Kegiatan</option>
-                                <option value="asistensiMengajar">Asistensi Mengajar di Satuan Pendidikan-Kampus
-                                    Merdeka</option>
-                                <option value="asistensi">Asistensi Satuan Pendidikan-Kampus Merdeka</option>
+                            <select class="form-select" id="bentukKegiatan" name="bentuk_kegiatan_id"
+                                data-placeholder="Pilih bentuk kegiatan">
+                                <option></option>
+                                @foreach ($bentuk_kegiatans as $bentuk)
+                                    <option value="{{ $bentuk->id }}">{{ $bentuk->name }}</option>
+                                @endforeach
                             </select>
                         </div>
 
@@ -268,18 +295,21 @@
                                     </div>
                                     <div class="form-group mb-3">
                                         <label for="sasaran" class="form-label">Sasaran</label>
-                                        <select class="form-select select2-sasaran">
-                                            <option value="">Pilih sasaran program</option>
-                                            <option value="sasaran1">Sasaran 1</option>
-                                            <option value="sasaran2">Sasaran 2</option>
+                                        <select class="form-select" id="sasaran" name="sasaran_id"
+                                            data-placeholder="Pilih sasaran program">
+                                            <option value="">Pilih Sasaran</option>
+                                            @foreach ($sasarans as $sasaran)
+                                                <option value="{{ $sasaran->id }}">{{ $sasaran->name }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
+
                                     <div class="form-group mb-3">
-                                        <label for="indikatorKinerja" class="form-label">Indikator Kinerja</label>
-                                        <select class="form-select select2-indikator">
-                                            <option value="">Pilih indikator kinerja</option>
-                                            <option value="indikator1">Indikator 1</option>
-                                            <option value="indikator2">Indikator 2</option>
+                                        <label for="indikator" class="form-label">Indikator Kinerja</label>
+                                        <select class="form-select" id="indikator" name="indikator_id"
+                                            data-placeholder="Pilih indikator kerja">
+                                            <option value="">Pilih Indikator</option>
+                                            <!-- Data indikator akan dimuat melalui Ajax -->
                                         </select>
                                     </div>
                                 </div>
@@ -295,104 +325,135 @@
 
 <!-- Scripts -->
 <script>
+    $(document).ready(function() {
+        $('#sasaran').on('change', function() {
+            var sasaranId = $(this).val();
+
+            if (sasaranId) {
+                $.ajax({
+                    url: '/get-indikators/' + sasaranId,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        $('#indikator').empty();
+                        $('#indikator').append('<option value="">Pilih Indikator</option>');
+
+                        $.each(data, function(key, value) {
+                            $('#indikator').append('<option value="' + value.id +
+                                '">' + value.indikator + '</option>');
+                        });
+                    },
+                    error: function(error) {
+                        console.log('Error:', error);
+                    }
+                });
+            } else {
+                $('#indikator').empty();
+                $('#indikator').append('<option value="">Pilih Indikator</option>');
+            }
+        });
+    });
+
+
+
     $('#myModal').on('shown.bs.modal', function() {
         initializeSelect2($(this));
     });
 
     function initializeSelect2(container = document) {
-    $(container).find('.select2:not(.select2-hidden-accessible)').each(function() {
-        $(this).select2({
-            dropdownParent: $(this).parent(),
-            width: '100%'
-        }).on('select2:open', function() {
-            $('body').addClass('no-horizontal-scroll');
-        }).on('select2:close', function() {
-            $('body').removeClass('no-horizontal-scroll');
+        $(container).find('.select2:not(.select2-hidden-accessible)').each(function() {
+            $(this).select2({
+                dropdownParent: $(this).parent(),
+                width: '100%'
+            }).on('select2:open', function() {
+                $('body').addClass('no-horizontal-scroll');
+            }).on('select2:close', function() {
+                $('body').removeClass('no-horizontal-scroll');
+            });
+        });
+    }
+
+    document.getElementById('addPenggiatBtn').addEventListener('click', function() {
+        var originalCard = document.querySelector('.penggiat-card');
+        var clone = originalCard.cloneNode(true);
+
+        var cardNumber = document.querySelectorAll('.penggiat-card').length + 1;
+        clone.querySelector('.card-header').innerHTML = '<i class="bi bi-geo-alt"></i> Pihak # ' + cardNumber;
+
+        // Add the "delete" button to the cloned card header
+        var deleteBtn = document.createElement('button');
+        deleteBtn.type = 'button';
+        deleteBtn.classList.add('btn', 'btn-danger', 'btn-sm', 'ms-auto', 'me-0');
+        deleteBtn.innerHTML = '<i class="bi bi-trash"></i>';
+        deleteBtn.style.float = 'right';
+        deleteBtn.addEventListener('click', function() {
+            clone.remove();
+        });
+        clone.querySelector('.card-header').appendChild(deleteBtn);
+
+        // Remove any existing Select2 elements from the clone
+        clone.querySelectorAll('.select2-container').forEach(el => el.remove());
+
+        // Reset the values of all form elements in the clone
+        clone.querySelectorAll('input, select, textarea').forEach(el => {
+            el.value = '';
+            if (el.classList.contains('select2-hidden-accessible')) {
+                $(el).select2('destroy').removeClass('select2-hidden-accessible');
+            }
+        });
+
+        // Update collapse functionality
+        var collapseToggle = clone.querySelector('.penanggungJawabToggle');
+        var collapseContent = clone.querySelector('.penanggungJawabCollapse');
+
+        // Generate unique IDs for the new collapse
+        var uniqueId = 'penanggungJawabCollapse' + cardNumber;
+        collapseContent.id = uniqueId;
+        collapseToggle.setAttribute('data-bs-target', '#' + uniqueId);
+        collapseToggle.setAttribute('aria-controls', uniqueId);
+
+        // Append the cloned card to the penggiatContainer
+        document.getElementById('penggiatContainer').appendChild(clone);
+
+        // Reinitialize Select2 for the newly added select elements
+        initializeSelect2(clone);
+
+        // Reinitialize collapse functionality
+        new bootstrap.Collapse(collapseContent, {
+            toggle: false
+        });
+
+        // Add click event listener for toggle
+        collapseToggle.addEventListener('click', function() {
+            bootstrap.Collapse.getOrCreateInstance(collapseContent).toggle();
         });
     });
-}
-
-document.getElementById('addPenggiatBtn').addEventListener('click', function() {
-    var originalCard = document.querySelector('.penggiat-card');
-    var clone = originalCard.cloneNode(true);
-
-    var cardNumber = document.querySelectorAll('.penggiat-card').length + 1;
-    clone.querySelector('.card-header').innerHTML = '<i class="bi bi-geo-alt"></i> Pihak # ' + cardNumber;
-
-    // Add the "delete" button to the cloned card header
-    var deleteBtn = document.createElement('button');
-    deleteBtn.type = 'button';
-    deleteBtn.classList.add('btn', 'btn-danger', 'btn-sm', 'ms-auto', 'me-0');
-    deleteBtn.innerHTML = '<i class="bi bi-trash"></i>';
-    deleteBtn.style.float = 'right';
-    deleteBtn.addEventListener('click', function() {
-        clone.remove();
-    });
-    clone.querySelector('.card-header').appendChild(deleteBtn);
-
-    // Remove any existing Select2 elements from the clone
-    clone.querySelectorAll('.select2-container').forEach(el => el.remove());
-
-    // Reset the values of all form elements in the clone
-    clone.querySelectorAll('input, select, textarea').forEach(el => {
-        el.value = '';
-        if (el.classList.contains('select2-hidden-accessible')) {
-            $(el).select2('destroy').removeClass('select2-hidden-accessible');
-        }
-    });
-
-    // Update collapse functionality
-    var collapseToggle = clone.querySelector('.penanggungJawabToggle');
-    var collapseContent = clone.querySelector('.penanggungJawabCollapse');
-
-    // Generate unique IDs for the new collapse
-    var uniqueId = 'penanggungJawabCollapse' + cardNumber;
-    collapseContent.id = uniqueId;
-    collapseToggle.setAttribute('data-bs-target', '#' + uniqueId);
-    collapseToggle.setAttribute('aria-controls', uniqueId);
-
-    // Append the cloned card to the penggiatContainer
-    document.getElementById('penggiatContainer').appendChild(clone);
-
-    // Reinitialize Select2 for the newly added select elements
-    initializeSelect2(clone);
-
-    // Reinitialize collapse functionality
-    new bootstrap.Collapse(collapseContent, {
-        toggle: false
-    });
-
-    // Add click event listener for toggle
-    collapseToggle.addEventListener('click', function() {
-        bootstrap.Collapse.getOrCreateInstance(collapseContent).toggle();
-    });
-});
 
     // Initialize Select2 and collapse functionality on page load
     $(document).ready(function() {
-    // Initialize Select2 for all select elements
-    initializeSelect2();
+        // Initialize Select2 for all select elements
+        initializeSelect2();
 
-    // Initialize collapse functionality for existing forms
-    document.querySelectorAll('.penanggungJawabToggle').forEach(function(toggle) {
-        var content = toggle.nextElementSibling;
-        new bootstrap.Collapse(content, {
-            toggle: false
+        // Initialize collapse functionality for existing forms
+        document.querySelectorAll('.penanggungJawabToggle').forEach(function(toggle) {
+            var content = toggle.nextElementSibling;
+            new bootstrap.Collapse(content, {
+                toggle: false
+            });
+            toggle.addEventListener('click', function() {
+                bootstrap.Collapse.getOrCreateInstance(content).toggle();
+            });
         });
-        toggle.addEventListener('click', function() {
-            bootstrap.Collapse.getOrCreateInstance(content).toggle();
+
+        // Dropzone initialization
+        Dropzone.autoDiscover = false;
+        const dropzone = new Dropzone("#my-dropzone", {
+            url: "/your/upload/endpoint",
+            maxFiles: 1,
+            acceptedFiles: ".pdf",
+            dictDefaultMessage: "Drag & Drop atau Klik area ini untuk upload"
         });
     });
-
-    // Dropzone initialization
-    Dropzone.autoDiscover = false;
-    const dropzone = new Dropzone("#my-dropzone", {
-        url: "/your/upload/endpoint",
-        maxFiles: 1,
-        acceptedFiles: ".pdf",
-        dictDefaultMessage: "Drag & Drop atau Klik area ini untuk upload"
-    });
-});
 
 
     $(document).ready(function() {

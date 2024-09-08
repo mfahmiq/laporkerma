@@ -19,8 +19,10 @@ return new class extends Migration
             $table->foreignId('kondisi_tertentu_id');
             $table->foreignId('penggiat_kerma_id');
             $table->foreignId('bentuk_kegiatan_id');
-            $table->date('tanggal_awal')->default(new DateTime());
-            $table->date('tanggal_akhir')->default(new DateTime());
+            $table->foreignId('country_id');
+            $table->foreignId('klasifikasi_mitra_id');
+            $table->date('tanggal_awal');
+            $table->date('tanggal_akhir');
             $table->string('nomor_dokumen');
             $table->string('judul');
             $table->text('deskripsi');
