@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Kerma extends Model
 {
     use HasFactory;
+<<<<<<< HEAD
 
     protected $guarded = ['id'];
     
@@ -40,4 +41,6 @@ class Kerma extends Model
     {
         return $this->belongsTo(BentukKegiatan::class);
     }
+=======
+>>>>>>> bd6d88dc7ef8172606f4d4bf0925e871c0d01483
 }

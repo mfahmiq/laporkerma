@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Mitra;
 use App\Models\Country;
+<<<<<<< HEAD
 use App\Models\KlasifikasiMitra;
+=======
+>>>>>>> bd6d88dc7ef8172606f4d4bf0925e871c0d01483
 use Illuminate\Http\Request;
 
 class MitraController extends Controller
@@ -15,9 +18,13 @@ class MitraController extends Controller
     public function index()
     {
         return view('mitra.mitra', [
+<<<<<<< HEAD
             'dataMitra' => Mitra::all(),
             'klasifikasi_mitras' => KlasifikasiMitra::all(),
             'countries' => Country::all()
+=======
+            'dataMitra' => Mitra::all()
+>>>>>>> bd6d88dc7ef8172606f4d4bf0925e871c0d01483
         ]);
     }
 
@@ -26,7 +33,13 @@ class MitraController extends Controller
      */
     public function create()
     {
+<<<<<<< HEAD
         return view('mitra.mitraCreate');
+=======
+        return view('mitra.mitraCreate', [
+            'countries' => Country::all()
+        ]);
+>>>>>>> bd6d88dc7ef8172606f4d4bf0925e871c0d01483
     }
 
 
@@ -40,7 +53,10 @@ class MitraController extends Controller
             'nama_institusi' => $request->nama_institusi,
             'alamat' => $request->alamat,
             'country_id' => $request->country_id,
+<<<<<<< HEAD
             'klasifikasi_mitra_id' => $request->klasifikasi_mitra_id,
+=======
+>>>>>>> bd6d88dc7ef8172606f4d4bf0925e871c0d01483
             'telp' => $request->telp,
             'website' => $request->website,
         ]);

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class BentukKegiatan extends Model
 {
     use HasFactory;
+<<<<<<< HEAD
 
     protected $guarded = ['id'];
 
@@ -25,4 +26,6 @@ class BentukKegiatan extends Model
     {
         return $this->belongsTo(Indikator::class);
     }
+=======
+>>>>>>> bd6d88dc7ef8172606f4d4bf0925e871c0d01483
 }

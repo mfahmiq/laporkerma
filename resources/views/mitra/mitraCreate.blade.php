@@ -10,12 +10,19 @@
                     @csrf
                     <div class="mb-3">
                         <label for="klasifikasi" class="form-label">Klasifikasi Mitra</label>
+<<<<<<< HEAD
                         <select class="form-select select2" id="klasifikasi" name="klasifikasi_mitra_id"
                             data-placeholder="Pilih Klasifikasi Mitra">
                             <option></option>
                             @foreach ($klasifikasi_mitras as $klasifikasi)
                                 <option value="{{ $klasifikasi->id }}">{{ $klasifikasi->name }}</option>
                             @endforeach
+=======
+                        <select class="form-select select2" id="klasifikasi" name="klasifikasi_id"
+                            data-placeholder="Pilih Klasifikasi Mitra">
+                            <option></option>
+                            <option value="1">Pilihan 1</option>
+>>>>>>> bd6d88dc7ef8172606f4d4bf0925e871c0d01483
                         </select>
                     </div>
                     <div class="mb-3">
@@ -31,12 +38,20 @@
                         <textarea class="form-control" id="alamat" name="alamat" rows="3"></textarea>
                     </div>
                     <div class="mb-3">
+<<<<<<< HEAD
                         <label for="country" class="form-label">Negara</label>
                         <select class="form-select select2" name="country_id" data-placeholder="Pilih Negara">
                             <option></option>
                             @foreach ($countries as $country)
                                 <option value="{{ $country->id }}">{{ $country->name }}</option>
                             @endforeach
+=======
+                        <label for="country_id" class="form-label">Negara</label>
+                        <select class="form-select select2" id="country_id" name="country_id"
+                            data-placeholder="Pilih Negara">
+                            <option></option>
+                            <option value="ID">Indonesia</option>
+>>>>>>> bd6d88dc7ef8172606f4d4bf0925e871c0d01483
                         </select>
                     </div>
                     <div class="mb-3">

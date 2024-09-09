@@ -11,14 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bentuk_kegiatans', function (Blueprint $table) {
+        Schema::create('indikators', function (Blueprint $table) {
             $table->id();
-<<<<<<< HEAD
-            $table->foreignId('sasaran_id');
-            $table->foreignId('indikator_id');
-=======
->>>>>>> bd6d88dc7ef8172606f4d4bf0925e871c0d01483
-            $table->string('name');
             $table->timestamps();
         });
     }
@@ -28,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('bentuk_kegiatans');
+        Schema::dropIfExists('indikators');
     }
 };

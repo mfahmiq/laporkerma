@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class KlasifikasiMitra extends Model
 {
     use HasFactory;
+<<<<<<< HEAD
 
     protected $guarded = ['id'];
 
@@ -15,4 +16,6 @@ class KlasifikasiMitra extends Model
     {
         return $this->hasMany(Mitra::class);
     }
+=======
+>>>>>>> bd6d88dc7ef8172606f4d4bf0925e871c0d01483
 }
