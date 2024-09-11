@@ -590,10 +590,3 @@ body {
     overflow: hidden;
     text-overflow: ellipsis;
 }
-
-.modal {
-    z-index: 1050; /* Nilai lebih tinggi dari sidebar */
-}
-body.modal-open {
-    overflow: hidden;
-}
