@@ -65,10 +65,10 @@
                                     <td class="small">{{ $mitra->country->name }}</td>
                                     <td class="small">{{ $mitra->status }}</td>
                                     <td class="text-center">
-                                        {{-- <a href="/mitra/{{ $mitra->id }}" class="btn btn-primary btn-sm me-2">
-                                        <i class="bx bx-detail"></i>
-                                    </a> --}}
-                                        <a href="{{ url('mitraEdit') }}" data-bs-toggle="modal"
+                                        <a class="btn btn-primary btn-sm me-2" data-bs-toggle="modal" data-bs-target="#detailModal">
+                                            <i class="bx bx-detail"></i>
+                                        </a> 
+                                        <a data-bs-toggle="modal"
                                             data-bs-target="#myModalEdit" class="btn btn-sm btn-warning me-2">
                                             <i class="bi bi-pencil-fill small"></i>
                                         </a>
@@ -88,6 +88,7 @@
     <!-- Include Modal -->
     @include('mitra.mitraEdit')
     @include('mitra.mitraCreate')
+    @include('mitra.mitraDetail')
 
 
 

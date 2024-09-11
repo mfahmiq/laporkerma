@@ -132,9 +132,9 @@
                                 <td class="small">Aktif</td>
                                 <td class="small">2024-12-31</td>
                                 <td class="text-center">
-                                    <a href="#" class="btn btn-primary btn-sm me-2">
+                                    <a href="#" class="btn btn-primary btn-sm me-2" data-bs-toggle="modal" data-bs-target="#detailModal">
                                         <i class="bx bx-detail"></i>
-                                    </a>
+                                    </a>                                    
                                     <a href="{{ url('kermaEdit') }}" class="btn btn-sm btn-warning me-2">
                                         <i class="bi bi-pencil-fill small"></i>
                                     </a>                                    
@@ -149,6 +149,8 @@
             </div>
         </div>
     </div>
+
+    @include('kerma.kermaDetail')
 
     <!-- Select2 CSS -->
 
@@ -198,5 +200,29 @@
                 $('#filterDropdowns').toggle();
             });
         });
+
+        $(document).ready(function() {
+    // Saat tombol diklik
+    $('a[data-bs-toggle="modal"]').on('click', function(e) {
+        e.preventDefault();
+
+        // Ambil ID mitra dari tombol
+        var mitraId = $(this).data('id');
+
+        // Kirim permintaan AJAX untuk mengambil konten modal
+        $.ajax({
+            url: '/mitra-detail/' + mitraId, // Rute untuk mengambil data modal
+            type: 'GET',
+            success: function(data) {
+                // Load konten modal dari response
+                $('#modalContent').html(data);
+            },
+            error: function() {
+                $('#modalContent').html('<p>Gagal memuat data</p>');
+            }
+        });
+    });
+});
+
     </script>
 </x-layouts>
