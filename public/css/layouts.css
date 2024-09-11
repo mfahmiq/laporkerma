@@ -306,13 +306,8 @@ body {
 }
 
 .profile-menu .dropdown-menu .profile-details img {
-<<<<<<< HEAD
     height: 40px;
     width: 40px;
-=======
-    height: 30px;
-    width: 30px;
->>>>>>> bd6d88dc7ef8172606f4d4bf0925e871c0d01483
     object-fit: cover;
     border-radius: 50%;
     margin-right: 10px;
@@ -327,31 +322,17 @@ body {
     border-bottom: 1px solid #1d1b31;
 }
 
-<<<<<<< HEAD
 
 
 .profile-menu .dropdown-menu .profile_name {
     color: white;
     font-size: 14px;
-=======
-.profile-menu .dropdown-menu .name-job {
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    align-items: center;
-}
-
-.profile-menu .dropdown-menu .profile_name {
-    color: white;
-    font-size: 11px;
->>>>>>> bd6d88dc7ef8172606f4d4bf0925e871c0d01483
     margin-left: 10px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-<<<<<<< HEAD
 /* Common styles for both dropdown-item links and buttons */
 .dropdown-item {
     color: white;
@@ -398,12 +379,6 @@ body {
 }
 
 
-=======
-.dropdown-menu .dropdown-item {
-    font-size: 12px;
-}
-
->>>>>>> bd6d88dc7ef8172606f4d4bf0925e871c0d01483
 .container {
     display: flex;
     flex-direction: column;
@@ -614,3 +589,12 @@ body {
 .cpanel-blue .card-content-part {
     background-color: #2573A6;
 }
+
+.select2-results__option {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+

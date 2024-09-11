@@ -7,12 +7,9 @@
     <title>LAPORKERMA</title>
     <link rel="icon" href="{{ asset('images/logo.png') }}" type="image/x-icon">
 
-<<<<<<< HEAD
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-=======
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
->>>>>>> bd6d88dc7ef8172606f4d4bf0925e871c0d01483
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.datatables.net/2.1.4/css/dataTables.bootstrap5.css">
@@ -75,34 +72,24 @@
                     <div class="dropdown-menu" id="profileDropdown">
                         <div class="profile-details" style="margin-right: 50px;">
                             <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Profile Picture">
-<<<<<<< HEAD
-                                <div class="profile_name">{{ auth()->user()->name }}</div>
-=======
-                            <div class="name-job">
-                                <div class="profile_name">{{ auth()->user()->name }}</div>
-                            </div>
->>>>>>> bd6d88dc7ef8172606f4d4bf0925e871c0d01483
+                            <div class="profile_name">{{ auth()->user()->name }}</div>
                         </div>
-                        <a href="#" class="dropdown-item">
+                        <a href="#" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#profileModal">
                             <i class='bx bx-user-circle' style="margin-right: 10px;"></i>
                             Profile Settings
                         </a>
-<<<<<<< HEAD
-                        
+
+                        @include('profil.profileEdit')
+
+
                         <form action="/logout" method="post">
                             @csrf
                             <button type="submit" class="dropdown-item logout-btn">
                                 <i class='bx bx-log-out' style="margin-right: 12px;"></i>Logout
                             </button>
                         </form>
-                        
 
-=======
-                        <form action="/logout" method="post">
-                            @csrf
-                            <button type="submit" class="dropdown-item" style="color: white"><i class='bx bx-log-out'
-                                    style="margin-right: 12px;"></i>Logout</button>
->>>>>>> bd6d88dc7ef8172606f4d4bf0925e871c0d01483
+
                         </form>
                     </div>
                 </div>
@@ -148,6 +135,14 @@
                 dropdownMenu.classList.remove('show');
             }
         });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var myModal = new bootstrap.Modal(document.getElementById('profileModal'));
+            document.querySelector('[data-bs-target="#profileModal"]').addEventListener('click', function(e) {
+                e.preventDefault();
+                myModal.show();
+            });
+        });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
@@ -158,13 +153,16 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<<<<<<< HEAD
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz4fnFO9l6TQOgE9F6cAyFJf0zF+N4bWQfdfXo5E4RZ5SikPpzpM8J6/Zh" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl0nYCE6gHHTaI8K85MZzR2VGF05yHlRvvFozfpfoeL" crossorigin="anonymous">
+    </script>
+
     <script>
         new DataTable('#example');
     </script>
-=======
-    <script>new DataTable('#example');</script>
->>>>>>> bd6d88dc7ef8172606f4d4bf0925e871c0d01483
 </body>
 
 </html>

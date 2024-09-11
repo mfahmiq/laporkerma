@@ -13,11 +13,8 @@ return new class extends Migration
     {
         Schema::create('bentuk_kegiatans', function (Blueprint $table) {
             $table->id();
-<<<<<<< HEAD
             $table->foreignId('sasaran_id');
             $table->foreignId('indikator_id');
-=======
->>>>>>> bd6d88dc7ef8172606f4d4bf0925e871c0d01483
             $table->string('name');
             $table->timestamps();
         });

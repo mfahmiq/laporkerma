@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class SumberPendanaan extends Model
 {
     use HasFactory;
-<<<<<<< HEAD
 
     protected $guarded = ['id'];
 
@@ -16,6 +15,4 @@ class SumberPendanaan extends Model
     {
         return $this->hasMany(Kerma::class);
     }
-=======
->>>>>>> bd6d88dc7ef8172606f4d4bf0925e871c0d01483
 }

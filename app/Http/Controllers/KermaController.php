@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-<<<<<<< HEAD
 use App\Models\BentukKegiatan;
 use App\Models\Country;
 use App\Models\Indikator;
@@ -15,9 +14,6 @@ use App\Models\PenggiatKerma;
 use App\Models\Sasaran;
 use App\Models\StatusKerma;
 use App\Models\SumberPendanaan;
-=======
-use Illuminate\Http\Request;
->>>>>>> bd6d88dc7ef8172606f4d4bf0925e871c0d01483
 
 class KermaController extends Controller
 {
@@ -26,7 +22,6 @@ class KermaController extends Controller
      */
     public function index()
     {
-<<<<<<< HEAD
         return view('kerma.kerma', [
             'dataKerma' => Kerma::all(),
             'jenis_kermas' => JenisKerma::all(),
@@ -38,9 +33,6 @@ class KermaController extends Controller
             'klasifikasi_mitras' => KlasifikasiMitra::all(),
             'countries' => Country::all()
         ]);
-=======
-        //
->>>>>>> bd6d88dc7ef8172606f4d4bf0925e871c0d01483
     }
 
     /**
@@ -48,7 +40,6 @@ class KermaController extends Controller
      */
     public function create()
     {
-<<<<<<< HEAD
         return view('kerma.kermaCreate', [
             'jenis_kermas' => JenisKerma::all(),
             'sumber_pendanaans' => SumberPendanaan::all(),
@@ -59,9 +50,6 @@ class KermaController extends Controller
             'klasifikasi_mitras' => KlasifikasiMitra::all(),
             'countries' => Country::all()
         ]);
-=======
-        //
->>>>>>> bd6d88dc7ef8172606f4d4bf0925e871c0d01483
     }
 
     /**
@@ -69,7 +57,6 @@ class KermaController extends Controller
      */
     public function store(Request $request)
     {
-<<<<<<< HEAD
         Kerma::create([
             'jenis_kerma_id' => $request->jenis_kerma_id,
             'sumber_pendanaan_id' => $request->sumber_pendanaan_id,
@@ -88,9 +75,6 @@ class KermaController extends Controller
         ]);
 
         return redirect('kerma')->with('toast_success', 'Data Berhasil Tersimpan');
-=======
-        //
->>>>>>> bd6d88dc7ef8172606f4d4bf0925e871c0d01483
     }
 
     /**
@@ -124,13 +108,10 @@ class KermaController extends Controller
     {
         //
     }
-<<<<<<< HEAD
 
     public function getIndikatorsBySasaran($sasaranId)
     {
         $indikators = Indikator::where('sasaran_id', $sasaranId)->get();
         return response()->json($indikators);
     }
-=======
->>>>>>> bd6d88dc7ef8172606f4d4bf0925e871c0d01483
 }

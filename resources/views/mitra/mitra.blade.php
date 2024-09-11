@@ -28,14 +28,9 @@
                             <select class="form-select select2" id="klasifikasiMitra"
                                 data-placeholder="Pilih Klasifikasi Mitra">
                                 <option></option>
-<<<<<<< HEAD
                                 @foreach ($klasifikasi_mitras as $klasifikasi)
                                     <option value="{{ $klasifikasi->id }}">{{ $klasifikasi->name }}</option>
                                 @endforeach
-=======
-                                <option value="1">Option 1</option>
-                                <option value="2">Option 2</option>
->>>>>>> bd6d88dc7ef8172606f4d4bf0925e871c0d01483
                             </select>
                         </div>
                         <div class="col-md-6 mb-2 d-flex align-items-center">
@@ -44,14 +39,9 @@
                             <!-- Negara Select2 -->
                             <select class="form-select select2" id="negara" data-placeholder="Pilih Negara">
                                 <option></option>
-<<<<<<< HEAD
                                 @foreach ($countries as $country)
                                     <option value="{{ $country->id }}">{{ $country->name }}</option>
                                 @endforeach
-=======
-                                <option value="ID">Indonesia</option>
-                                <option value="US">Amerika Serikat</option>
->>>>>>> bd6d88dc7ef8172606f4d4bf0925e871c0d01483
                             </select>
                         </div>
                     </div>
@@ -69,7 +59,6 @@
                         </thead>
                         <tbody>
                             @foreach ($dataMitra as $mitra)
-<<<<<<< HEAD
                                 <tr>
                                     <td class="small text-center">{{ $loop->iteration }}</td>
                                     <td class="small">{{ $mitra->nama_institusi }}</td>
@@ -88,26 +77,6 @@
                                         </a>
                                     </td>
                                 </tr>
-=======
-                            <tr>
-                                <td class="small text-center">{{ $loop->iteration }}</td>
-                                <td class="small">{{ $mitra->nama_institusi }}</td>
-                                <td class="small">{{ $mitra->negara }}</td>
-                                <td class="small">{{ $mitra->status }}</td>
-                                <td class="text-center">
-                                    {{-- <a href="/mitra/{{ $mitra->id }}" class="btn btn-primary btn-sm me-2">
-                                        <i class="bx bx-detail"></i>
-                                    </a> --}}
-                                    <a href="{{ url('mitraEdit') }}" data-bs-toggle="modal" data-bs-target="#myModalEdit"
-                                        class="btn btn-sm btn-warning me-2">
-                                        <i class="bi bi-pencil-fill small"></i>
-                                    </a>
-                                    <a href="#" class="btn btn-sm btn-danger btn-delete" id="delete">
-                                        <i class="bi bi-trash-fill small"></i>
-                                    </a>
-                                </td>
-                            </tr>
->>>>>>> bd6d88dc7ef8172606f4d4bf0925e871c0d01483
                             @endforeach
                         </tbody>
                     </table>
