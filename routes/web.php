@@ -12,10 +12,10 @@ Route::get('/', function () {
     return view('login/index');
 });
 
-// Route profile
 Route::get('/profile', function () {
-    return view('profil/profile');
-});
+    return view('profil/profileEdit');
+})->name('profile');
+
 
 // Route login menggunakan controller
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');

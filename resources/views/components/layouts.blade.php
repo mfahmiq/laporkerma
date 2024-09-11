@@ -74,12 +74,10 @@
                             <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Profile Picture">
                             <div class="profile_name">{{ auth()->user()->name }}</div>
                         </div>
-                        <a href="#" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#profileModal">
+                        <a class="dropdown-item" href="{{ route('profile') }}">
                             <i class='bx bx-user-circle' style="margin-right: 10px;"></i>
                             Profile Settings
                         </a>
-
-                        @include('profil.profileEdit')
 
 
                         <form action="/logout" method="post">

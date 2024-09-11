@@ -242,7 +242,6 @@ body {
     padding: 0 20px;
     background: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    z-index: 100;
 }
 
 .home-section .home-content .bx-menu {
@@ -322,8 +321,6 @@ body {
     border-bottom: 1px solid #1d1b31;
 }
 
-
-
 .profile-menu .dropdown-menu .profile_name {
     color: white;
     font-size: 14px;
@@ -377,7 +374,6 @@ body {
 .dropdown-item i {
     margin-right: 10px;
 }
-
 
 .container {
     display: flex;
@@ -434,7 +430,6 @@ footer {
     margin-bottom: 1rem; /* Atur sesuai kebutuhan */
     padding: 2rem; /* Atur sesuai kebutuhan */
 }
-
 
 .select2-container--default .select2-selection--single {
     height: calc(2.25rem + 2px) !important;
@@ -506,7 +501,7 @@ footer {
 /* dashboard card */
 
 body {
-    font-family: 'Raleway', sans-serif;
+    font-family: "Raleway", sans-serif;
 }
 
 .main-part {
@@ -519,7 +514,7 @@ body {
 .cpanel {
     width: 32%;
     display: inline-block;
-    background-color: #34495E;
+    background-color: #34495e;
     color: #fff;
     margin-top: 50px;
 }
@@ -535,7 +530,7 @@ body {
     /* Vertically centers the icon */
     border: 1px solid #fff;
     border-radius: 50%;
-    background-color: #34495E;
+    background-color: #34495e;
     display: inline-block;
     margin-top: -25px;
     margin-bottom: 10px;
@@ -548,7 +543,7 @@ body {
 }
 
 .card-content-part {
-    background-color: #2F4254;
+    background-color: #2f4254;
     padding: 5px 0px;
 }
 
@@ -574,7 +569,7 @@ body {
 
 .cpanel-green .icon-part,
 .cpanel-green .icon-part i {
-    background-color: #16A085;
+    background-color: #16a085;
 }
 
 .cpanel-green .card-content-part {
@@ -583,11 +578,11 @@ body {
 
 .cpanel-blue .icon-part,
 .cpanel-blue .icon-part i {
-    background-color: #2980B9;
+    background-color: #2980b9;
 }
 
 .cpanel-blue .card-content-part {
-    background-color: #2573A6;
+    background-color: #2573a6;
 }
 
 .select2-results__option {
@@ -596,5 +591,9 @@ body {
     text-overflow: ellipsis;
 }
 
-
-
+.modal {
+    z-index: 1050; /* Nilai lebih tinggi dari sidebar */
+}
+body.modal-open {
+    overflow: hidden;
+}
