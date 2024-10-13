@@ -11,8 +11,8 @@ class Sasaran extends Model
 
     protected $guarded = ['id'];
 
-    public function bentuk_kegiatans()
+    public function detail_kegiatans()
     {
-        return $this->hasMany(BentukKegiatan::class);
+        return $this->hasMany(DetailKegiatan::class);
     }
 }

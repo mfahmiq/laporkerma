@@ -11,6 +11,11 @@ class Indikator extends Model
 
     protected $guarded = ['id'];
 
+    public function detail_kegiatans()
+    {
+        return $this->hasMany(DetailKegiatan::class);
+    }
+
     public function sasaran()
     {
         return $this->belongsTo(Sasaran::class);

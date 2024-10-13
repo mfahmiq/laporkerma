@@ -13,20 +13,17 @@ return new class extends Migration
     {
         Schema::create('kermas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('jenis_kerma_id');
-            $table->foreignId('sumber_pendanaan_id');
-            $table->foreignId('status_kerma_id');
-            $table->foreignId('kondisi_tertentu_id');
-            $table->foreignId('penggiat_kerma_id');
-            $table->foreignId('bentuk_kegiatan_id');
-            $table->foreignId('country_id');
-            $table->foreignId('klasifikasi_mitra_id');
+            $table->foreignId('jenis_kerma_id')->constrained()->onDelete('cascade');
+            $table->foreignId('sumber_pendanaan_id')->constrained()->onDelete('cascade');
+            $table->foreignId('status_kerma_id')->constrained()->onDelete('cascade');
+            $table->foreignId('kondisi_tertentu_id')->nullable()->constrained()->onDelete('set null');
             $table->date('tanggal_awal');
             $table->date('tanggal_akhir');
-            $table->string('nomor_dokumen');
+            $table->string('dokumen')->nullable();
+            $table->string('nomor_dokumen')->nullable();
             $table->string('judul');
-            $table->text('deskripsi');
-            $table->text('anggaran');
+            $table->text('deskripsi')->nullable();
+            $table->text('anggaran')->nullable();
             $table->timestamps();
         });
     }

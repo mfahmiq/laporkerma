@@ -10,34 +10,33 @@ class Kerma extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
-    
-    public function country() 
-    {
-        return $this->belongsTo(Country::class);
-    }
 
-    public function klasifikasi_mitra() 
-    {
-        return $this->belongsTo(KlasifikasiMitra::class);
-    }
-
-    public function jenis_kerma() 
-    {
-        return $this->belongsTo(JenisKerma::class);
-    }
-
-    public function sumber_pendanaan() 
-    {
-        return $this->belongsTo(SumberPendanaan::class);
-    }
-
-    public function status_kerma() 
+    // Relasi ke StatusKerma
+    public function status_kerma()
     {
         return $this->belongsTo(StatusKerma::class);
     }
 
-    public function bentuk_kegiatan() 
+    // Relasi ke JenisKerma
+    public function jenis_kerma()
     {
-        return $this->belongsTo(BentukKegiatan::class);
+        return $this->belongsTo(JenisKerma::class);
+    }
+
+    // Relasi ke SumberPendanaan
+    public function sumber_pendanaan()
+    {
+        return $this->belongsTo(SumberPendanaan::class);
+    }
+
+    // Relasi One-to-Many ke PenggiatKerma
+    public function penggiat_kermas()
+    {
+        return $this->hasMany(PenggiatKerma::class);
+    }
+
+    public function detail_kegiatans()
+    {
+        return $this->hasMany(DetailKegiatan::class);
     }
 }

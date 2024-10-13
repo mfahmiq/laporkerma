@@ -7,32 +7,39 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         return view('login.index');
     }
 
-    public function authenticate(Request $request) {
+    public function authenticate(Request $request)
+    {
         $credentials = $request->validate([
-            'email' => 'required|email:dns',
+            'email' => 'required|email',
             'password' => 'required'
         ]);
 
-        if(Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('/dashboard');
+            return response()->json([
+                'success' => true,
+                'message' => 'Login berhasil!',
+                'redirect' => '/dashboard' // Ganti dengan URL yang sesuai
+            ]);
         }
 
-        return back()->with('loginError', 'Login gagal!');
+        return response()->json([
+            'success' => false,
+            'message' => 'Email dan password tidak cocok!'
+        ], 422); // Menggunakan status 422 untuk kesalahan validasi
     }
 
     public function logout()
     {
         Auth::logout();
-
         request()->session()->invalidate();
-
         request()->session()->regenerateToken();
 
-        return redirect('/login');
+        return response()->json(["success" => true, "message" => "Logout berhasil!"]);
     }
 }

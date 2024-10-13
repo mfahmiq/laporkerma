@@ -13,12 +13,13 @@ return new class extends Migration
     {
         Schema::create('detail_kegiatans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('bentuk_kegiatan_id');
-            $table->foreignId('sasaran_id');
-            $table->foreignId('indikator_id');
-            $table->string('nilai_kontrak');
-            $table->string('luaran');
-            $table->text('keterangan')->nullable();
+            $table->foreignId('kerma_id')->nullable()->constrained('kermas')->onDelete('cascade'); // Menghubungkan ke tabel kermas
+            $table->foreignId('bentuk_kegiatan_id')->nullable()->constrained('bentuk_kegiatans')->onDelete('cascade'); // Menghubungkan ke tabel bentuk_kegiatans
+            $table->foreignId('sasaran_id')->nullable()->constrained('sasarans')->onDelete('set null'); // Menghubungkan ke tabel sasarans
+            $table->foreignId('indikator_id')->nullable()->constrained('indikators')->onDelete('set null'); // Menghubungkan ke tabel indikator
+            $table->string('nilai_kontrak')->nullable(); // Menggunakan decimal untuk nilai kontrak
+            $table->string('luaran')->nullable(); // Jika luaran adalah nama, gunakan string
+            $table->text('keterangan')->nullable(); // Keterangan bersifat opsional
             $table->timestamps();
         });
     }

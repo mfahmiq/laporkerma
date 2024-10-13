@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('penggiat_kermas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('instansi_id');
-            $table->foreignId('unit_pelaksana_id');
-            $table->text('alamat');
-            $table->string('nama_penandatangan');
-            $table->string('jabatan_penandatangan');
+            $table->foreignId('kerma_id')->nullable()->constrained('kermas')->onDelete('cascade');
+            $table->foreignId('mitra_id')->nullable()->constrained('mitras')->onDelete('cascade');
+            $table->foreignId('unit_pelaksana_id')->nullable()->constrained()->onDelete('set null');
+            $table->text('alamat')->nullable();
+            $table->string('nama_penandatangan')->nullable();
+            $table->string('jabatan_penandatangan')->nullable();
             $table->string('nama_penanggungjawab')->nullable();
             $table->string('jabatan_penanggungjawab')->nullable();
             $table->timestamps();

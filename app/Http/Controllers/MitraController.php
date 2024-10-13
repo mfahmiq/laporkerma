@@ -12,10 +12,34 @@ class MitraController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        // Mengambil data berdasarkan filter yang diterapkan
+        $query = Mitra::query();
+
+        // Filter berdasarkan klasifikasi mitra
+        if ($request->filled('klasifikasi_mitra_id')) {
+            $query->where('klasifikasi_mitra_id', $request->klasifikasi_mitra_id);
+        }
+
+        // Filter berdasarkan negara
+        if ($request->filled('country_id')) {
+            $query->where('country_id', $request->country_id);
+        }
+
+        // Mengurutkan data berdasarkan created_at secara menurun
+        $dataMitra = $query->orderBy('created_at', 'desc')->get();
+
+        // Periksa setiap mitra apakah dia digunakan di Penggiat Kermas
+        foreach ($dataMitra as $mitra) {
+            // Periksa apakah mitra berelasi dengan Penggiat Kermas
+            $isUsed = $mitra->penggiat_kermas()->exists(); // Mengecek relasi
+            $mitra->status = $isUsed ? 'Digunakan' : 'Tidak Digunakan'; // Set status
+        }
+
+        // Mengirimkan data ke view
         return view('mitra.mitra', [
-            'dataMitra' => Mitra::all(),
+            'dataMitra' => $dataMitra,
             'klasifikasi_mitras' => KlasifikasiMitra::all(),
             'countries' => Country::all()
         ]);
@@ -26,34 +50,38 @@ class MitraController extends Controller
      */
     public function create()
     {
-        return view('mitra.mitraCreate');
+        // Menampilkan form create
+        return view('mitra.mitraCreate', [
+            'klasifikasi_mitras' => KlasifikasiMitra::all(),
+            'countries' => Country::all()
+        ]);
     }
-
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        // dd($request->all());
-        Mitra::create([
-            'nama_institusi' => $request->nama_institusi,
-            'alamat' => $request->alamat,
-            'country_id' => $request->country_id,
-            'klasifikasi_mitra_id' => $request->klasifikasi_mitra_id,
-            'telp' => $request->telp,
-            'website' => $request->website,
+        // Validasi input
+        $validatedData = $request->validate([
+            'nama_institusi' => 'required|string|max:255',
+            'alamat' => 'nullable|string',
+            'country_id' => 'nullable|integer',
+            'klasifikasi_mitra_id' => 'nullable|integer',
+            'telp' => 'nullable|string|max:15',
+            'website' => 'nullable|string|max:255',
+        ], [
+            'nama_institusi.required' => 'Nama institusi tidak boleh kosong',
         ]);
 
-        return redirect('mitra')->with('toast_success', 'Data Berhasil Tersimpan');
-    }
+        // Menyimpan data ke database
+        $mitra = Mitra::create($validatedData);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show()
-    {
-        //
+        return response()->json([
+            'message' => 'Data mitra berhasil disimpan!',
+            'id' => $mitra->id,
+            'nama_institusi' => $mitra->nama_institusi
+        ]);
     }
 
     /**
@@ -61,8 +89,9 @@ class MitraController extends Controller
      */
     public function edit(string $id)
     {
-        $damit = Mitra::findorfail($id);
-        return view('mitra.mitraEdit', compact('damit'));
+        // Mendapatkan data mitra berdasarkan ID
+        $mitra = Mitra::findOrFail($id);
+        return response()->json(['mitra' => $mitra]);
     }
 
     /**
@@ -70,7 +99,26 @@ class MitraController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // Validasi input
+        $validatedData = $request->validate([
+            'nama_institusi' => 'required|string|max:255',
+            'alamat' => 'nullable|string',
+            'country_id' => 'nullable|integer',
+            'klasifikasi_mitra_id' => 'nullable|integer',
+            'telp' => 'nullable|string|max:15',
+            'website' => 'nullable|string|max:255',
+        ], [
+            'nama_institusi.required' => 'Nama institusi tidak boleh kosong',
+        ]);
+
+        // Mengambil data mitra yang akan diupdate berdasarkan ID
+        $mitra = Mitra::findOrFail($id);
+
+        // Mengupdate data di database
+        $mitra->update($validatedData);
+
+        // Redirect ke halaman mitra dengan pesan sukses
+        return response()->json(['message' => 'Mitra berhasil diperbarui.']);
     }
 
     /**
@@ -78,6 +126,13 @@ class MitraController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // Mendapatkan data mitra berdasarkan ID
+        $mitra = Mitra::findOrFail($id);
+
+        // Menghapus data dari database
+        $mitra->delete();
+
+        // Mengirim respon JSON sukses untuk permintaan Ajax
+        return response()->json(['success' => true]);
     }
 }

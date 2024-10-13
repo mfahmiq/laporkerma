@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('mitras', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('country_id');
-            $table->foreignId('klasifikasi_mitra_id');
+            $table->foreignId('country_id')->nullable();
+            $table->foreignId('klasifikasi_mitra_id')->nullable();
             $table->string('nama_institusi');
-            $table->text('alamat');
+            $table->text('alamat')->nullable();
             $table->string('telp')->nullable();
             $table->string('website')->nullable();
             $table->string('status')->default('Digunakan');

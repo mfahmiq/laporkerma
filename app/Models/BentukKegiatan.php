@@ -11,18 +11,8 @@ class BentukKegiatan extends Model
 
     protected $guarded = ['id'];
 
-    public function kermas()
+    public function detail_kegiatans()
     {
-        return $this->hasMany(Kerma::class);
-    }
-
-    public function sasaran() 
-    {
-        return $this->belongsTo(Sasaran::class);
-    }
-
-    public function indikator() 
-    {
-        return $this->belongsTo(Indikator::class);
+        return $this->hasMany(DetailKegiatan::class);
     }
 }

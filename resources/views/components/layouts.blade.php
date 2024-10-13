@@ -7,9 +7,9 @@
     <title>LAPORKERMA</title>
     <link rel="icon" href="{{ asset('images/logo.png') }}" type="image/x-icon">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.datatables.net/2.1.4/css/dataTables.bootstrap5.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <!-- Bootstrap CSS -->
@@ -19,9 +19,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <!-- Select2 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.14.2/dist/sweetalert2.min.css" rel="stylesheet">
     <!-- Dropzone CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.css" />
     <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/dropzone/css/basic.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('assets/vendor/dropzone/css/dropzone.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="{{ asset('css/layouts.css') }}">
 </head>
 
@@ -66,23 +70,12 @@
             <div class="home-content fixed-header">
                 <i class='bx bx-menu'></i>
                 <div class="profile-menu" onclick="toggleDropdown()">
-                    <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Profile Picture" id="profile-pic">
+                    <div><small>Selamat Datang, {{ auth()->user()->name }}</small></div>
+                    <div class="bi bi-chevron-down"></div>
                     <div class="dropdown-menu" id="profileDropdown">
-                        <div class="profile-details" style="margin-right: 50px;">
-                            <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Profile Picture">
-                            <div class="name-job">
-                                <div class="profile_name">{{ auth()->user()->name }}</div>
-                            </div>
-                        </div>
-                        <a href="#" class="dropdown-item">
-                            <i class='bx bx-user-circle' style="margin-right: 10px;"></i>
-                            Profile Settings
-                        </a>
-                        <form action="/logout" method="post">
-                            @csrf
-                            <button type="submit" class="dropdown-item" style="color: white"><i class='bx bx-log-out'
-                                    style="margin-right: 12px;"></i>Logout</button>
-                        </form>
+                        <button type="button" class="dropdown-item" id="btn-logout" style="color: white">
+                            <i class='bx bx-log-out' style="margin-right: 12px;"></i>Logout
+                        </button>
                     </div>
                 </div>
             </div>
@@ -137,7 +130,53 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>new DataTable('#example');</script>
+    <script src="{{ asset('assets/vendor/dropzone/js/dropzone.min.js') }}" type="text/javascript"></script>
+    <script src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js"></script>
+    <script>
+        new DataTable('#example');
+    </script>
+    <script>
+        $(document).on('click', '#btn-logout', function() {
+        Swal.fire({
+            title: "Anda yakin ingin logout?",
+            text: "Anda akan keluar dari akun Anda.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Ya, logout!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Kirim permintaan AJAX untuk logout
+                $.ajax({
+                    url: '/logout',
+                    method: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}' // Sertakan token CSRF
+                    },
+                    success: function(response) {
+                        // Tampilkan pesan sukses dan alihkan ke halaman login
+                        Swal.fire({
+                            title: "Berhasil Logout!",
+                            text: "Anda telah berhasil logout.",
+                            icon: "success"
+                        }).then(() => {
+                            window.location.href = '/login'; // Alihkan ke halaman login
+                        });
+                    },
+                    error: function(xhr) {
+                        // Menangani kesalahan jika logout gagal
+                        Swal.fire({
+                            title: "Kesalahan!",
+                            text: "Terjadi kesalahan. Silakan coba lagi.",
+                            icon: "error"
+                        });
+                    }
+                });
+            }
+        });
+    });
+    </script>
 </body>
 
 </html>

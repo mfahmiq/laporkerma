@@ -10,6 +10,16 @@ class Mitra extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+
+    public function users()
+    {
+        return $this->hasMany(User::class, 'instansi_id');
+    }
+
+    public function kermas()
+    {
+        return $this->hasMany(Kerma::class);
+    }
     
     public function country() 
     {
@@ -21,4 +31,8 @@ class Mitra extends Model
         return $this->belongsTo(KlasifikasiMitra::class);
     }
 
+    public function penggiat_kermas()
+    {
+        return $this->hasMany(PenggiatKerma::class);
+    }
 }
