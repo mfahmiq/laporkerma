@@ -4,7 +4,7 @@
         <div class="container-fluid mt-4">
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <h5 class="card-title">Form Kerjasama</h5>
+                    <h5 class="card-title">Tambah Kerjasama</h5>
                     <button type="submit" class="btn btn-success btn-sm" id="btn-save">
                         <i class="bx bx-save"></i> Simpan
                     </button>
@@ -196,16 +196,35 @@
                                     <div class="collapse show pihakSatuCollapse">
                                         <div class="card-body">
                                             <div class="mb-3">
-                                                <label for="namaInstansi" class="form-label">Nama Instansi</label>
+                                                <label for="namaInstansi" class="form-label">Nama Unit</label>
                                                 <div class="d-flex align-items-center">
                                                     <select class="form-select select2 me-2"
-                                                        name="penggiat[0][mitra_id]" disabled>
-                                                        <!-- Menggunakan ID instansi pengguna saat ini -->
-                                                        <option value="{{ auth()->user()->mitra->id }}" selected>
-                                                            {{ auth()->user()->mitra->nama_institusi }}</option>
+                                                        name="penggiat[0][mitra_id]"
+                                                        data-placeholder="Pilih Nama Unit"
+                                                        {{ auth()->user()->role === 'admin' ? '' : 'disabled' }}>
+
+                                                        <!-- Admin bisa melihat semua mitra -->
+                                                        @if (auth()->user()->role === 'admin')
+                                                            <option value=""></option>
+                                                            @foreach ($mitras as $mitra)
+                                                                <option value="{{ $mitra->id }}"
+                                                                    {{ old('penggiat[0][mitra_id]') == $mitra->id ? 'selected' : '' }}>
+                                                                    {{ $mitra->nama_institusi }}
+                                                                </option>
+                                                            @endforeach
+                                                        @else
+                                                            <!-- Pengguna biasa hanya bisa melihat instansinya sendiri -->
+                                                            <option value="{{ auth()->user()->mitra->id }}" selected>
+                                                                {{ auth()->user()->mitra->nama_institusi }}
+                                                            </option>
+                                                        @endif
                                                     </select>
-                                                    <input type="hidden" name="penggiat[0][mitra_id]"
-                                                        value="{{ auth()->user()->mitra->id }}">
+
+                                                    <!-- Hanya tambahkan input hidden jika bukan admin -->
+                                                    @if (auth()->user()->role !== 'admin')
+                                                        <input type="hidden" name="penggiat[0][mitra_id]"
+                                                            value="{{ auth()->user()->mitra->id }}">
+                                                    @endif
                                                 </div>
                                             </div>
                                             <div class="mb-3">
@@ -271,11 +290,11 @@
                                     <div class="collapse pihakDuaCollapse">
                                         <div class="card-body">
                                             <div class="mb-3">
-                                                <label for="namaInstansi" class="form-label">Nama Instansi</label>
+                                                <label for="namaInstansi" class="form-label">Nama Unit</label>
                                                 <div class="d-flex align-items-center">
                                                     <select class="form-select select2 me-2"
                                                         name="penggiat[1][mitra_id]"
-                                                        data-placeholder="Pilih Nama Instansi" style="width: 80%;">
+                                                        data-placeholder="Pilih Nama Unit" style="width: 80%;">
                                                         <option value=""></option>
                                                         @foreach ($mitras as $mitra)
                                                             <option value="{{ $mitra->id }}"
@@ -284,9 +303,9 @@
                                                             </option>
                                                         @endforeach
                                                     </select>
-                                                    <button class="btn btn-success ms-1" data-bs-toggle="modal"
+                                                    {{-- <button class="btn btn-success ms-1" data-bs-toggle="modal"
                                                         data-bs-target="#myModalCreate" type="button"><i
-                                                            class="bi bi-plus"></i></button>
+                                                            class="bi bi-plus"></i></button> --}}
                                                 </div>
                                             </div>
                                             <div class="mb-3">
@@ -481,9 +500,9 @@
                 <div class="collapse show pihakMoreCollapse">
                     <div class="card-body">
                         <div class="mb-3">
-                            <label for="namaInstansi" class="form-label">Nama Instansi</label>
+                            <label for="namaInstansi" class="form-label">Nama Unit</label>
                             <div class="d-flex align-items-center">
-                                <select class="form-select select2 me-2" name="penggiat[${penggiatIndex}][mitra_id]" data-placeholder="Pilih Nama Instansi" style="width: 80%;">
+                                <select class="form-select select2 me-2" name="penggiat[${penggiatIndex}][mitra_id]" data-placeholder="Pilih Nama Unit" style="width: 80%;">
                                     <option value=""></option>
                                     @foreach ($mitras as $mitra)
                                         <option value="{{ $mitra->id }}"
@@ -492,9 +511,6 @@
                                         </option>
                                     @endforeach
                                 </select>
-                                <button class="btn btn-success ms-1" data-bs-toggle="modal"
-                                    data-bs-target="#myModalCreate" type="button"><i
-                                    class="bi bi-plus"></i></button>
                             </div>
                         </div>
                         <div class="mb-3">

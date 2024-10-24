@@ -71,14 +71,14 @@ class MitraController extends Controller
             'telp' => 'nullable|string|max:15',
             'website' => 'nullable|string|max:255',
         ], [
-            'nama_institusi.required' => 'Nama institusi tidak boleh kosong',
+            'nama_institusi.required' => 'Nama unit tidak boleh kosong',
         ]);
 
         // Menyimpan data ke database
         $mitra = Mitra::create($validatedData);
 
         return response()->json([
-            'message' => 'Data mitra berhasil disimpan!',
+            'message' => 'Data unit berhasil disimpan!',
             'id' => $mitra->id,
             'nama_institusi' => $mitra->nama_institusi
         ]);
@@ -108,7 +108,7 @@ class MitraController extends Controller
             'telp' => 'nullable|string|max:15',
             'website' => 'nullable|string|max:255',
         ], [
-            'nama_institusi.required' => 'Nama institusi tidak boleh kosong',
+            'nama_institusi.required' => 'Nama unit tidak boleh kosong',
         ]);
 
         // Mengambil data mitra yang akan diupdate berdasarkan ID
@@ -118,7 +118,7 @@ class MitraController extends Controller
         $mitra->update($validatedData);
 
         // Redirect ke halaman mitra dengan pesan sukses
-        return response()->json(['message' => 'Mitra berhasil diperbarui.']);
+        return response()->json(['message' => 'Unit berhasil diperbarui.']);
     }
 
     /**

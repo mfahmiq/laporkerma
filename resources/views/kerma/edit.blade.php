@@ -213,12 +213,13 @@
                                         <div class="collapse show pihakAllCollapse">
                                             <div class="card-body">
                                                 <div class="mb-3">
-                                                    <label for="namaInstansi" class="form-label">Nama Instansi</label>
+                                                    <label for="namaInstansi" class="form-label">Nama Unit</label>
                                                     <div class="d-flex align-items-center">
                                                         <select class="form-select select2 me-2"
                                                             name="penggiat[{{ $index }}][mitra_id]"
-                                                            data-placeholder="Pilih Nama Instansi"
-                                                            @if ($index == 0) disabled @endif>
+                                                            data-placeholder="Pilih Nama Unit"
+                                                            @if ($index == 0 && auth()->user()->role !== 'admin') disabled @endif>
+
                                                             <option value=""></option>
                                                             @foreach ($mitras as $mitra)
                                                                 <option value="{{ $mitra->id }}"
@@ -227,16 +228,12 @@
                                                                 </option>
                                                             @endforeach
                                                         </select>
-                                                        @if ($index == 0)
-                                                            <!-- Input tersembunyi untuk mengirimkan ID instansi -->
+
+                                                        @if ($index == 0 && auth()->user()->role !== 'admin')
+                                                            <!-- Input tersembunyi untuk mengirimkan ID instansi bagi user non-admin -->
                                                             <input type="hidden"
                                                                 name="penggiat[{{ $index }}][mitra_id]"
                                                                 value="{{ $penggiat->mitra->id }}">
-                                                        @endif
-                                                        @if ($index != 0)
-                                                            <button class="btn btn-success ms-1"
-                                                                data-bs-toggle="modal" data-bs-target="#myModalCreate"
-                                                                type="button"><i class="bi bi-plus"></i></button>
                                                         @endif
                                                     </div>
                                                 </div>
@@ -419,7 +416,6 @@
             </div>
         </div>
     </form>
-    @include('mitra.mitraCreate')
 </x-layouts>
 
 <script>
@@ -465,9 +461,9 @@
                 <div class="collapse show pihakMoreCollapse">
                     <div class="card-body">
                         <div class="mb-3">
-                            <label for="namaInstansi" class="form-label">Nama Instansi</label>
+                            <label for="namaInstansi" class="form-label">Nama Unit</label>
                             <div class="d-flex align-items-center">
-                                <select class="form-select select2 me-2" name="penggiat[${penggiatIndex}][mitra_id]" data-placeholder="Pilih Nama Instansi">
+                                <select class="form-select select2 me-2" name="penggiat[${penggiatIndex}][mitra_id]" data-placeholder="Pilih Nama Unit">
                                     <option value=""></option>
                                     @foreach ($mitras as $mitra)
                                         <option value="{{ $mitra->id }}"
@@ -476,9 +472,6 @@
                                         </option>
                                     @endforeach
                                 </select>
-                                <button class="btn btn-success ms-1" data-bs-toggle="modal"
-                                    data-bs-target="#myModalCreate" type="button"><i
-                                    class="bi bi-plus"></i></button>
                             </div>
                         </div>
                         <div class="mb-3">
@@ -634,49 +627,53 @@
         initializeSelect2();
 
         $(document).on('click', '#btn-update', function(e) {
-        e.preventDefault();
-        
-        // SweetAlert2 dialog konfirmasi
-        Swal.fire({
-            title: "Apakah Anda ingin menyimpan perubahan?",
-            showDenyButton: true,
-            showCancelButton: true,
-            confirmButtonText: "Simpan",
-            denyButtonText: "Jangan simpan"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // Kirim form menggunakan AJAX
-                $.ajax({
-                    url: $('#edit-form').attr('action'), // Ambil URL dari action form
-                    method: 'POST',
-                    data: new FormData($('#edit-form')[0]), // Mengambil data dari form
-                    processData: false, // Jangan olah data
-                    contentType: false, // Kirim dengan tipe konten default
-                    success: function(response) {
-                        // Tampilkan alert sukses
-                        Swal.fire({
-                            title: "Disimpan!",
-                            text: "Data Anda telah berhasil diperbarui.",
-                            icon: "success"
-                        }).then(() => {
-                            window.location.href = '/kerma'; // Alihkan setelah sukses
-                        });
-                    },
-                    error: function(xhr) {
-                        // Menangani kesalahan
-                        let errorMessage = xhr.responseJSON.message || 'Gagal memperbarui data. Silakan coba lagi.';
-                        Swal.fire({
-                            title: "Gagal!",
-                            text: errorMessage,
-                            icon: "error"
-                        });
-                    }
-                });
-            } else if (result.isDenied) {
-                Swal.fire("Perubahan tidak disimpan", "", "info");
-            }
+            e.preventDefault();
+
+            // SweetAlert2 dialog konfirmasi
+            Swal.fire({
+                title: "Apakah Anda ingin menyimpan perubahan?",
+                showDenyButton: true,
+                showCancelButton: true,
+                confirmButtonText: "Simpan",
+                denyButtonText: "Jangan simpan"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Kirim form menggunakan AJAX
+                    $.ajax({
+                        url: $('#edit-form').attr(
+                        'action'), // Ambil URL dari action form
+                        method: 'POST',
+                        data: new FormData($('#edit-form')[
+                        0]), // Mengambil data dari form
+                        processData: false, // Jangan olah data
+                        contentType: false, // Kirim dengan tipe konten default
+                        success: function(response) {
+                            // Tampilkan alert sukses
+                            Swal.fire({
+                                title: "Disimpan!",
+                                text: "Data Anda telah berhasil diperbarui.",
+                                icon: "success"
+                            }).then(() => {
+                                window.location.href =
+                                '/kerma'; // Alihkan setelah sukses
+                            });
+                        },
+                        error: function(xhr) {
+                            // Menangani kesalahan
+                            let errorMessage = xhr.responseJSON.message ||
+                                'Gagal memperbarui data. Silakan coba lagi.';
+                            Swal.fire({
+                                title: "Gagal!",
+                                text: errorMessage,
+                                icon: "error"
+                            });
+                        }
+                    });
+                } else if (result.isDenied) {
+                    Swal.fire("Perubahan tidak disimpan", "", "info");
+                }
+            });
         });
-    });
     });
 
     // Preview PDF

@@ -27,11 +27,18 @@ class KermaController extends Controller
         // Mengambil instansi id dari pengguna yang sedang login
         $instansiId = Auth::user()->instansi_id;
 
-        // Mulai query Kerma dengan whereHas untuk mengfilter berdasarkan instansi pengguna
-        $query = Kerma::with('penggiat_kermas.mitra')
-            ->whereHas('penggiat_kermas', function ($query) use ($instansiId) {
+        // Mulai query Kerma
+        $query = Kerma::with('penggiat_kermas.mitra', 'detail_kegiatans.bentuk_kegiatan');
+
+        // Periksa apakah pengguna adalah admin
+        if (Auth::user()->role === 'admin') {
+            // Jika admin, ambil semua kerma tanpa filter instansi
+        } else {
+            // Jika bukan admin, filter berdasarkan instansi pengguna
+            $query->whereHas('penggiat_kermas', function ($query) use ($instansiId) {
                 $query->where('mitra_id', $instansiId);
             });
+        }
 
         // Filter berdasarkan jenis dokumen kerma jika dipilih
         if ($request->filled('jenis_kerma_id')) {
@@ -48,9 +55,23 @@ class KermaController extends Controller
             $query->where('status_kerma_id', $request->status_kerma_id);
         }
 
-        // Filter berdasarkan bentuk kegiatan
+        // Filter berdasarkan bentuk kegiatan melalui detail_kegiatans
         if ($request->filled('bentuk_kegiatan_id')) {
-            $query->where('bentuk_kegiatan_id', $request->bentuk_kegiatan_id);
+            $query->whereHas('detail_kegiatans', function ($query) use ($request) {
+                $query->where('bentuk_kegiatan_id', $request->bentuk_kegiatan_id);
+            });
+        }
+
+        // Filter berdasarkan unit melalui penggiat
+        if ($request->filled('mitra_id')) {
+            $query->whereHas('penggiat_kermas', function ($query) use ($request) {
+                $query->where('mitra_id', $request->mitra_id);
+            });
+        }
+
+        // Filter berdasarkan tahun
+        if ($request->filled('tahun')) {
+            $query->whereYear('tanggal_awal', $request->tahun);
         }
 
         // Ambil data berdasarkan filter yang sudah diterapkan
@@ -60,10 +81,11 @@ class KermaController extends Controller
         $jenis_kermas = JenisKerma::all();
         $sumber_pendanaans = SumberPendanaan::all();
         $status_kermas = StatusKerma::all();
+        $mitras = Mitra::all();
         $bentuk_kegiatans = BentukKegiatan::all();
 
         // Tampilkan data ke view
-        return view('kerma.index', compact('dataKerma', 'jenis_kermas', 'sumber_pendanaans', 'status_kermas', 'bentuk_kegiatans'));
+        return view('kerma.index', compact('dataKerma', 'jenis_kermas', 'sumber_pendanaans', 'status_kermas', 'mitras', 'bentuk_kegiatans'));
     }
 
 

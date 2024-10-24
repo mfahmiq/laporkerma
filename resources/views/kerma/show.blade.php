@@ -79,6 +79,8 @@
                             <tr>
                                 <th class="small text-center">No</th>
                                 <th class="small text-center">Penggiat</th>
+                                <th class="small text-center">Penandatangan</th>
+                                <th class="small text-center">Penanggung Jawab</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -88,7 +90,17 @@
                                         <p>{{ $loop->iteration }}</p>
                                     </td>
                                     <td>
-                                        <p>{{ $penggiat->mitra->nama_institusi ?? '-' }}</p><br>
+                                        <small>{{ $penggiat->mitra->nama_institusi ?? '-' }}</small><br>
+                                    </td>
+                                    <td>
+                                        <small>
+                                            {{ $penggiat->nama_penandatangan ?? '-' }} ( {{ $penggiat->jabatan_penandatangan ?? '-' }} )
+                                        </small>
+                                    </td>
+                                    <td>
+                                        <small>
+                                            {{ $penggiat->nama_penanggungjawab ?? '-' }} ( {{ $penggiat->jabatan_penanggungjawab ?? '-' }} )
+                                        </small>
                                     </td>
                                 </tr>
                             @endforeach

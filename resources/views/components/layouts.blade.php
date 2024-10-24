@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LAPORKERMA</title>
-    <link rel="icon" href="{{ asset('images/logo.png') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('images/logoitgfix.png') }}" type="image/x-icon">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -33,8 +33,8 @@
     <div class="wrapper">
         <div class="sidebar close">
             <div class="logo-details">
-                <img src="{{ asset('images/logo.png') }}" alt="Logo" class="logo-img">
-                <span class="logo_name">Laporkerma</span>
+                <img src="{{ asset('images/logoitgfix.png') }}" alt="Logo" class="logo-img">
+                <span class="logo_name">LAPORKERMA</span>
             </div>
             <ul class="nav-links">
                 <li>
@@ -43,7 +43,7 @@
                         <span class="link_name">Beranda</span>
                     </a>
                     <ul class="sub-menu blank">
-                        <li><a class="link_name" href="{{ url('/') }}">Beranda</a></li>
+                        <li><a class="link_name" href="{{ url('/dashboard') }}">Beranda</a></li>
                     </ul>
                 </li>
                 <li>
@@ -52,18 +52,29 @@
                         <span class="link_name">Kerjasama</span>
                     </a>
                     <ul class="sub-menu blank">
-                        <li><a class="link_name" href="{{ url('/profile') }}">Kerjasama</a></li>
+                        <li><a class="link_name" href="{{ url('/kerma') }}">Kerjasama</a></li>
                     </ul>
                 </li>
-                <li>
-                    <a href="{{ url('/mitra') }}">
-                        <i class='bx bx-group'></i>
-                        <span class="link_name">Mitra</span>
-                    </a>
-                    <ul class="sub-menu blank">
-                        <li><a class="link_name" href="{{ url('/profile') }}">Mitra</a></li>
-                    </ul>
-                </li>
+                @if (auth()->user()->isAdmin())
+                    <li>
+                        <a href="{{ url('/mitra') }}">
+                            <i class='bx bx-building'></i>
+                            <span class="link_name">Unit</span>
+                        </a>
+                        <ul class="sub-menu blank">
+                            <li><a class="link_name" href="{{ url('/mitra') }}">Unit</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="{{ url('/user') }}">
+                            <i class='bx bx-group'></i>
+                            <span class="link_name">User</span>
+                        </a>
+                        <ul class="sub-menu blank">
+                            <li><a class="link_name" href="{{ url('/user') }}">User</a></li>
+                        </ul>
+                    </li>
+                @endif
             </ul>
         </div>
         <section class="home-section">
@@ -137,45 +148,46 @@
     </script>
     <script>
         $(document).on('click', '#btn-logout', function() {
-        Swal.fire({
-            title: "Anda yakin ingin logout?",
-            text: "Anda akan keluar dari akun Anda.",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Ya, logout!"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // Kirim permintaan AJAX untuk logout
-                $.ajax({
-                    url: '/logout',
-                    method: 'POST',
-                    data: {
-                        _token: '{{ csrf_token() }}' // Sertakan token CSRF
-                    },
-                    success: function(response) {
-                        // Tampilkan pesan sukses dan alihkan ke halaman login
-                        Swal.fire({
-                            title: "Berhasil Logout!",
-                            text: "Anda telah berhasil logout.",
-                            icon: "success"
-                        }).then(() => {
-                            window.location.href = '/login'; // Alihkan ke halaman login
-                        });
-                    },
-                    error: function(xhr) {
-                        // Menangani kesalahan jika logout gagal
-                        Swal.fire({
-                            title: "Kesalahan!",
-                            text: "Terjadi kesalahan. Silakan coba lagi.",
-                            icon: "error"
-                        });
-                    }
-                });
-            }
+            Swal.fire({
+                title: "Anda yakin ingin logout?",
+                text: "Anda akan keluar dari akun Anda.",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Ya, logout!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Kirim permintaan AJAX untuk logout
+                    $.ajax({
+                        url: '/logout',
+                        method: 'POST',
+                        data: {
+                            _token: '{{ csrf_token() }}' // Sertakan token CSRF
+                        },
+                        success: function(response) {
+                            // Tampilkan pesan sukses dan alihkan ke halaman login
+                            Swal.fire({
+                                title: "Berhasil Logout!",
+                                text: "Anda telah berhasil logout.",
+                                icon: "success"
+                            }).then(() => {
+                                window.location.href =
+                                '/login'; // Alihkan ke halaman login
+                            });
+                        },
+                        error: function(xhr) {
+                            // Menangani kesalahan jika logout gagal
+                            Swal.fire({
+                                title: "Kesalahan!",
+                                text: "Terjadi kesalahan. Silakan coba lagi.",
+                                icon: "error"
+                            });
+                        }
+                    });
+                }
+            });
         });
-    });
     </script>
 </body>
 

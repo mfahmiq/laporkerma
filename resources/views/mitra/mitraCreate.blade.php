@@ -3,16 +3,16 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="myModalLabel">Tambah Mitra</h5>
+                <h5 class="modal-title" id="myModalLabel">Tambah Unit</h5>
                 <button type="button" class="btn-close btn-sm" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form id="addMitraForm" method="post">
                     @csrf
                     <div class="mb-3">
-                        <label for="klasifikasi" class="form-label">Klasifikasi Mitra</label>
+                        <label for="klasifikasi" class="form-label">Klasifikasi Unit</label>
                         <select class="form-select select2" id="klasifikasi" name="klasifikasi_mitra_id"
-                            data-placeholder="Pilih Klasifikasi Mitra">
+                            data-placeholder="Pilih Klasifikasi Unit">
                             <option></option>
                             @foreach ($klasifikasi_mitras as $klasifikasi)
                                 <option value="{{ $klasifikasi->id }}">{{ $klasifikasi->name }}</option>
@@ -20,11 +20,11 @@
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="nama_institusi" class="form-label">Nama Institusi</label>
+                        <label for="nama_institusi" class="form-label">Nama Unit</label>
                         <div class="input-group">
                             <span class="input-group-text"><i class="bi bi-building"></i></span>
                             <input type="text" class="form-control" id="nama_institusi" name="nama_institusi"
-                                placeholder="Nama Institusi" value="{{ old('nama_institusi') }}">
+                                placeholder="Nama Unit" value="{{ old('nama_institusi') }}">
                         </div>
                         @error('nama_institusi')
                             <div class="text-danger">{{ $message }}</div>

@@ -2,7 +2,7 @@
     <div class="container-fluid mt-4">
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h5 class="card-title">Tabel Mitra</h5>
+                <h5 class="card-title">Tabel Unit</h5>
                 <div class="d-flex align-items-center">
                     <!-- Tombol + Add -->
                     <a class="btn btn-success btn-sm small" data-bs-toggle="modal" data-bs-target="#myModalCreate">+
@@ -17,7 +17,7 @@
                             <span class="input-group-text bg-transparent border-0"><i
                                     class="bi bi-buildings"></i></span>
                             <select class="form-select select2" id="klasifikasi_mitra_id" name="klasifikasi_mitra_id"
-                                data-placeholder="Pilih Klasifikasi Mitra">
+                                data-placeholder="Pilih Klasifikasi Unit">
                                 <option></option>
                                 @foreach ($klasifikasi_mitras as $klasifikasi)
                                     <option value="{{ $klasifikasi->id }}"
@@ -49,7 +49,7 @@
                         <thead>
                             <tr>
                                 <th class="small text-center">No</th>
-                                <th class="small text-center">Nama</th>
+                                <th class="small text-center">Unit</th>
                                 <th class="small text-center">Negara</th>
                                 <th class="small text-center">Status</th>
                                 <th class="small text-center">Aksi</th>
@@ -61,9 +61,9 @@
                                     <td class="small text-center">{{ $loop->iteration }}</td>
                                     <td class="small">
                                         <div class="m-b-sm">{{ $mitra->nama_institusi }}</div>
-                                        <span class="label text-muted">{{ $mitra->klasifikasi_mitra->name }}</span>
+                                        <span class="label text-muted">{{ $mitra->klasifikasi_mitra->name ?? '-' }}</span>
                                     </td>
-                                    <td class="small">{{ $mitra->country->name }}</td>
+                                    <td class="small">{{ $mitra->country->name ?? '-' }}</td>
                                     <td class="small">{{ $mitra->status }}</td>
                                     <td class="text-center">
                                         <div class="d-flex justify-content-center align-items-center">
@@ -147,7 +147,7 @@
                         Swal.fire({
                             position: "top-end",
                             icon: "success",
-                            title: "Data mitra berhasil disimpan!",
+                            title: "Unit berhasil ditambahkan!",
                             showConfirmButton: false,
                             timer: 1500
                         }).then(() => {
@@ -249,18 +249,19 @@
                     Swal.fire({
                         icon: 'error',
                         title: 'Tidak dapat menghapus!',
-                        text: 'Mitra ini sedang digunakan dan tidak dapat dihapus.',
+                        text: 'Unit ini sedang digunakan dan tidak dapat dihapus.',
                     });
                 } else {
                     // Jika status "Tidak Digunakan", konfirmasi penghapusan
                     Swal.fire({
                         title: "Apakah Anda yakin?",
-                        text: "Anda tidak akan dapat mengembalikannya!",
+                        text: "Data unit ini akan dihapus!",
                         icon: "warning",
                         showCancelButton: true,
                         confirmButtonColor: "#3085d6",
                         cancelButtonColor: "#d33",
-                        confirmButtonText: "Ya, hapus ini!"
+                        confirmButtonText: "Hapus",
+                        cancelButtonText: "Batal"
                     }).then((result) => {
                         if (result.isConfirmed) {
                             // Permintaan AJAX untuk penghapusan

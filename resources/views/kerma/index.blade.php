@@ -2,7 +2,7 @@
     <div class="container-fluid mt-4" style="overflow: hidden;">
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h5 class="card-title">Tabel Kerjasama</h5>
+                <h5 class="card-title">Data Kerjasama</h5>
                 <div class="d-flex align-items-center">
                     <!-- Tombol Filter -->
                     {{-- <a href="#" class="btn btn-info btn-sm me-2" id="filterButton">
@@ -77,6 +77,36 @@
                             </div>
                             <!-- Anda bisa menambahkan filter lain jika diperlukan -->
                         </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-2 d-flex align-items-center">
+                                <span class="input-group-text bg-transparent border-0"><i
+                                        class="bi bi-calendar"></i></span>
+                                <select class="form-select select2" id="tahun" name="tahun"
+                                    data-placeholder="Pilih Tahun">
+                                    <option value=""></option>
+                                    @for ($year = now()->year; $year >= 2021; $year--)
+                                        <option value="{{ $year }}"
+                                            {{ request('tahun') == $year ? 'selected' : '' }}>
+                                            {{ $year }}
+                                        </option>
+                                    @endfor
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-2 d-flex align-items-center">
+                                <!-- Bentuk Kegiatan Select2 -->
+                                <span class="input-group-text bg-transparent border-0"><i
+                                        class="bi bi-building"></i></span>
+                                <select class="form-select select2" id="mitra_id" name="mitra_id"
+                                    data-placeholder="Pilih Unit">
+                                    <option></option>
+                                    @foreach ($mitras as $mitra)
+                                        <option value="{{ $mitra->id }}"
+                                            {{ request('mitra_id') == $mitra->id ? 'selected' : '' }}>
+                                            {{ $mitra->nama_institusi }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -88,7 +118,7 @@
                         <tr>
                             <th class="small text-center">No</th>
                             <th class="small text-center">Judul</th>
-                            <th class="small text-center">Instansi</th>
+                            <th class="small text-center">Unit</th>
                             <th class="small text-center">Status</th>
                             <th class="small text-center">Masa Berlaku</th>
                             <th class="small text-center">Aksi</th>
@@ -105,8 +135,7 @@
                                 </td>
                                 <td>
                                     @foreach ($kerma->penggiat_kermas as $penggiat)
-                                        @if ($loop->iteration > 1)
-                                            <!-- Hanya tampilkan penggiat kedua dan seterusnya -->
+                                        @if (auth()->user()->role === 'admin' || $loop->iteration > 1)
                                             <small>• </small>
                                             {{ $penggiat->mitra ? $penggiat->mitra->nama_institusi : '-' }}<br>
                                         @endif
@@ -143,7 +172,6 @@
             </div>
         </div>
     </div>
-    </div>
 
     <!-- jQuery and Select2 JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -165,7 +193,8 @@
             initializeSelect2();
 
             // Auto submit form on dropdown change
-            $('#jenis_kerma_id, #sumber_pendanaan_id, #status_kerma_id, #bentuk_kegiatan_id').on('change',
+            $('#jenis_kerma_id, #sumber_pendanaan_id, #status_kerma_id, #bentuk_kegiatan_id, #mitra_id, #tahun').on(
+                'change',
                 function() {
                     $(this).closest('form').submit(); // Submit form ketika pilihan berubah
                 });
@@ -177,12 +206,13 @@
                 // SweetAlert2 dialog konfirmasi
                 Swal.fire({
                     title: "Apakah Anda yakin?",
-                    text: "Anda tidak akan dapat mengembalikannya!",
+                    text: "Data kerjasama ini akan dihapus!",
                     icon: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#3085d6",
                     cancelButtonColor: "#d33",
-                    confirmButtonText: "Ya, hapus ini!"
+                    confirmButtonText: "Hapus",
+                    cancelButtonText: "Batal"
                 }).then((result) => {
                     if (result.isConfirmed) {
                         // Permintaan AJAX untuk penghapusan
@@ -201,7 +231,7 @@
                                         icon: "success"
                                     }).then(() => {
                                         location
-                                    .reload(); // Muat ulang halaman untuk mencerminkan perubahan
+                                            .reload(); // Muat ulang halaman untuk mencerminkan perubahan
                                     });
                                 }
                             },

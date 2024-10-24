@@ -21,6 +21,7 @@ class User extends Authenticatable
         'email',
         'password',
         'instansi_id',
+        'role',
     ];
 
     /**
@@ -54,5 +55,10 @@ class User extends Authenticatable
     public function penggiat_kermas()
     {
         return $this->hasMany(PenggiatKerma::class);
+    }
+
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
     }
 }

@@ -15,11 +15,6 @@ class Mitra extends Model
     {
         return $this->hasMany(User::class, 'instansi_id');
     }
-
-    public function kermas()
-    {
-        return $this->hasMany(Kerma::class);
-    }
     
     public function country() 
     {

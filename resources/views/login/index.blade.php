@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Form</title>
+    <title>LAPORKERMA | Login</title>
     <!-- Tambahkan Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Tambahkan SweetAlert2 CSS -->
@@ -81,10 +81,8 @@
                         </div>
                     @enderror
                 </div>
-                <button type="submit" class="btn btn-primary w-100 mt-4 rounded-2">Masuk</button>
+                <button type="submit" class="btn btn-primary w-100 mt-3 rounded-2">Masuk</button>
             </form>
-            <small class="d-block text-center mt-3">Belum punya akses?</small>
-            <small class="d-block text-center mt-2"><a href="/register">DAFTAR</a></small>
         </div>
     </div>
 
