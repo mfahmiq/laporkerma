@@ -20,12 +20,7 @@
     <!-- Select2 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.14.2/dist/sweetalert2.min.css" rel="stylesheet">
-    <!-- Dropzone CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.css" />
     <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet">
-    <link href="{{ asset('assets/vendor/dropzone/css/basic.min.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ asset('assets/vendor/dropzone/css/dropzone.min.css') }}" rel="stylesheet" type="text/css">
-    <link href="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="{{ asset('css/layouts.css') }}">
 </head>
 
@@ -141,8 +136,6 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="{{ asset('assets/vendor/dropzone/js/dropzone.min.js') }}" type="text/javascript"></script>
-    <script src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js"></script>
     <script>
         new DataTable('#example');
     </script>

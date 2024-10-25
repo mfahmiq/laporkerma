@@ -409,16 +409,7 @@ footer {
 .select2-container {
     width: 100% !important;
 }
-/* Custom styles for Dropzone */
-.dropzone {
-    min-height: 150px; /* Minimum height */
-    border: 2px dashed #007bff; /* Dashed border style */
-    background-color: #f8f9fa; /* Background color */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
+
 .container.mt-4 {
     margin-bottom: 0; /* Menghapus margin bawah */
 }
@@ -443,15 +434,7 @@ footer {
     line-height: 1.5 !important;
 }
 
-.dropzone {
-    min-height: 120px;
-    border: 2px dashed #007bff;
-    border-radius: 5px;
-    background: #f9f9f9;
-    padding: 20px;
-    text-align: center;
-    cursor: pointer;
-}
+
 
 .dz-message {
     font-size: 1.25rem;
